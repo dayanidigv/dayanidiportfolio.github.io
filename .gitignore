@@ -7,3 +7,7 @@
 # versions (in assets/images/assets/*.webp) are what the site actually loads.
 # Keep the PNGs locally as source, but don't bloat the repo with ~26MB.
 # assets/images/assets/*.png
+
+# wrangler local cache/state (account id, etc.)
+.wrangler/
+worker/.wrangler/

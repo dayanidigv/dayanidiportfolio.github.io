@@ -94,7 +94,8 @@
 *, ::before, ::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis owns smooth scrolling; native smooth only as reduced-motion fallback */
+  scroll-behavior: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(139, 92, 246, 0.5) transparent;
 }
@@ -1400,6 +1401,7 @@ q::before, q::after {
 @media (prefers-reduced-motion: reduce) {
   .asset-orbit, .asset-halo, .asset-cube, .asset-crystal, .asset-nodes,
   .hero-bg-rain { animation: none; }
+  html { scroll-behavior: smooth; } /* fallback when Lenis is disabled */
 }
 
 /* ===== HERO TYPOGRAPHY ===== */
@@ -3732,4 +3734,79 @@ main section[id].in-view .sec-tag {
 @media (prefers-reduced-motion: reduce) {
   .ep-pulse, .ep-ring, .ep-status.established .ep-status-dot { animation: none; }
   .ep-ring { opacity: 0; }
+}
+
+/* ================================================================
+   PAGE-WIDE PARALLAX FIELD  (Scrollytelling 2.0 depth)
+   Faint infrastructure layers behind all content, drifting at
+   different speeds on scroll (engine in hero-effects.js). Content
+   sits above via z-index. Reduced-motion users never get the field.
+================================================================ */
+.l-main { position: relative; }
+
+/* z-index:-1 keeps the field behind all content without creating a
+   stacking context on each section (which would trap the project modal). */
+.parallax-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.parallax-layer {
+  position: absolute;
+  mix-blend-mode: screen;
+  will-change: transform;
+  -webkit-user-select: none;
+  user-select: none;
+  filter: saturate(1.1);
+}
+
+/* lighter + fewer pixels to push on small screens */
+@media (max-width: 768px) {
+  .parallax-layer { opacity: 0.11 !important; }
+  .parallax-layer:nth-child(even) { display: none; }
+}
+
+/* ===== PROJECT CARDS as service tiles (icon emblem, no stray photos) ===== */
+.item > img.pw-cover-hidden { display: none; }
+
+.pw-emblem {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 1.2rem;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.pw-emblem i {
+  font-size: 2.7rem;
+  line-height: 1;
+  color: var(--purple-lt);
+  filter: drop-shadow(0 0 16px rgba(139, 92, 246, 0.5));
+}
+.pw-emblem-name {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #e2e8f0;
+  text-align: center;
+}
+/* on hover the emblem yields to the project detail text */
+.item:hover .pw-emblem { opacity: 0; transform: scale(0.92); }
+
+/* honeypot — off-screen so humans never see/fill it; bots do, and get dropped */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }

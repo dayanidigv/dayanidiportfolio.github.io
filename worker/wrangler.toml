@@ -1,0 +1,23 @@
+name = "notify-telegram-proxy"
+main = "telegram-proxy.js"
+compatibility_date = "2024-11-01"
+
+# Secrets are NOT stored here. Set them once after `wrangler login`:
+#   wrangler secret put TELEGRAM_TOKEN   # paste the NEW (rotated) bot token
+#   wrangler secret put CHAT_ID          # 1221832086
+#
+# Then: wrangler deploy
+
+# ---- Per-IP rate limiting (Cloudflare native rate-limit bindings) ----
+# period must be 10 or 60 (seconds). namespace_id is any unique integer.
+[[unsafe.bindings]]
+name = "CONTACT_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 3, period = 60 }   # max 3 contact submits / IP / minute
+
+[[unsafe.bindings]]
+name = "NOTIFY_LIMITER"
+type = "ratelimit"
+namespace_id = "1002"
+simple = { limit = 12, period = 60 }  # max 12 visit pings / IP / minute

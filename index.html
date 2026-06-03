@@ -127,8 +127,8 @@
 
                       <div class="home__data sql" style="padding: 1.1rem 1.25rem; font-size: clamp(0.56rem, 2.55vw, 0.9rem); display: inline-block; max-width: 100%; overflow-x: auto;">
                         <span style="color: #60a5fa;">SELECT</span> <span style="color: #e2e8f0;">*</span> <span style="color: #60a5fa;">FROM</span> <span style="color: #e2e8f0; animation: glowgreen 2s infinite;">engineers</span> <span style="color: #60a5fa;">WHERE</span><br>
-                        &nbsp;&nbsp;<span style="color: #e2e8f0;">name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">LIKE</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'%<span class="nametag"></span>%'</span> <span style="color: #60a5fa;">AND</span><br>
-                        &nbsp;&nbsp;<span style="color: #e2e8f0;">role</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">=</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'Backend_Systems_Engineer'</span> <span style="color: #60a5fa;">AND</span><br>
+                        &nbsp;&nbsp;<span style="color: #e2e8f0;">name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">LIKE</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'%<span class="nametag"></span>%'</span> <span style="color: #60a5fa;">AND</span><br>
+                        &nbsp;&nbsp;<span style="color: #e2e8f0;">role</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">=</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'Backend_Systems_Engineer'</span> <span style="color: #60a5fa;">AND</span><br>
                         &nbsp;&nbsp;<span style="color: #e2e8f0;">company</span>  <span style="color: #60a5fa;">=</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'Nile'</span> <span style="color: #60a5fa;">AND</span><br>
                         &nbsp;&nbsp;<span style="color: #e2e8f0;">specialty</span> <span style="color: #60a5fa;">IN</span> <span style="color: #64748b;">(</span><span style="color: #a78bfa;">'Automation'</span><span style="color: #64748b;">,</span> <span style="color: #a78bfa;">'Scale'</span><span style="color: #64748b;">,</span> <span style="color: #a78bfa;">'Reliability'</span><span style="color: #64748b;">)</span><span style="color: #60a5fa;">;</span>
                       </div>
@@ -699,6 +699,8 @@
                     <div class="contact-panel-title">Send a message</div>
                     <div class="contact-panel-sub">Routed straight to me &mdash; signal won't be missed.</div>
                     <form action="" onsubmit="sendMessage(event)">
+                      <!-- honeypot: hidden from humans, bots fill it → silently dropped -->
+                      <input type="text" id="hpInput" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
                       <div class="form-grid">
                         <div>
                           <label class="contact__label">Name</label>
@@ -781,9 +783,13 @@
           import { updateView } from "/assets/js/firebase.js";
           updateView();
          </script>
-<script>fetch('https://api.telegram.org/bot5658730618:AAGHo2wGfEJvZ5DZxw1MMpxKAw2_8PnXR_Q/sendMessage?chat_id=1221832086&text=Someone%20viewed%20the%20portfolio')</script>
+<!-- visit ping is now sent via the Worker proxy in main.js (no token in client) -->
         <!--===== SCROLL REVEAL =====-->
         <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.js"></script>
+
+        <!--===== LENIS SMOOTH SCROLL (powers the parallax glide) =====-->
+        <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+        <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 
         <!--===== MAIN JS =====-->
         <script src="/assets/js/main.js"></script>

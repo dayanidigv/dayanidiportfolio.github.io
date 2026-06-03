@@ -1,5 +1,19 @@
-let token = '5658730618:AAGHo2wGfEJvZ5DZxw1MMpxKAw2_8PnXR_Q';
-let chatId = '1221832086';
+/* ================================================================
+   API endpoint — Cloudflare Worker that proxies Telegram so the bot
+   token is never exposed in client code. Deploy: see /worker/README.md
+   then replace the placeholder below with your Worker URL.
+================================================================ */
+const API_BASE = 'https://notify-telegram-proxy.dayanidigv954.workers.dev';
+const API_READY = /^https:\/\/.+\.workers\.dev$/.test(API_BASE) && !API_BASE.includes('YOUR-SUBDOMAIN');
+
+// visit ping via the proxy (was an inline token'd fetch in index.html)
+if (API_READY) {
+  fetch(`${API_BASE}/notify`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ page: location.pathname, ref: document.referrer || 'direct' }),
+  }).catch(() => {});
+}
 
 /* ================================================================
    CONFIG - operational status pill (formerly "open to work")
@@ -79,52 +93,48 @@ typeNextWord();
 function sendMessage(event) {
   event.preventDefault();
   const button = document.getElementById('sendmessage');
-  const name = document.getElementById('nameInput').value;
-  const email = document.getElementById('emailInput').value;
-  const subject = document.getElementById('subjectInput').value;
-  const description = document.getElementById('descriptionInput').value;
-  const message = `✔️From Portfolio \n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nDescription: \n\t${description}`;
-  const encodedMessage = encodeURIComponent(message);
-  fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodedMessage}`)
-  .then(response => response.json())
-  .then(data => {
-     console.log(data);
-      if (data.ok === true) {
-         document.getElementById('nameInput').value = "";
-         document.getElementById('emailInput').value = "";
-         document.getElementById('subjectInput').value = "";
-         document.getElementById('descriptionInput').value = "";
-         button.style.color = '#00ff37';
-         button.style.border = '2px solid #00ff37';
-         button.style.animation = 'glowgreen 5s infinite';
 
-        // Add event listener to remove animation after it finishes
-        button.addEventListener('animationend', () => {
-          button.style.animation = '';
-        });
-         } else {
-          button.style.color = '#ff0000';
-         button.style.border = '2px solid #ff0000';
-         button.style.animation = 'glowgreen 1s infinite';
+  const flash = (ok) => {
+    button.style.color = ok ? '#00ff37' : '#ff0000';
+    button.style.border = '2px solid ' + (ok ? '#00ff37' : '#ff0000');
+    button.style.animation = (ok ? 'glowgreen' : 'glowred') + (ok ? ' 5s' : ' 1s') + ' infinite';
+    button.addEventListener('animationend', () => { button.style.animation = ''; }, { once: true });
+  };
 
-        // Add event listener to remove animation after it finishes
-        button.addEventListener('animationend', () => {
-          button.style.animation = '';
-        });
-         }
-        })
-        .catch(error => {
-          console.error(error);
-          button.style.color = '#ff0000';
-         button.style.border = '2px solid #ff0000';
-         button.style.animation = 'glowred 1s infinite';
-
-        // Add event listener to remove animation after it finishes
-        button.addEventListener('animationend', () => {
-          button.style.animation = '';
-        });
-        });
+  if (!API_READY) {
+    console.warn('Contact endpoint not configured yet — see /worker/README.md');
+    flash(false);
+    return;
   }
+
+  const hp = document.getElementById('hpInput');
+  const payload = {
+    name: document.getElementById('nameInput').value,
+    email: document.getElementById('emailInput').value,
+    subject: document.getElementById('subjectInput').value,
+    description: document.getElementById('descriptionInput').value,
+    website: hp ? hp.value : '', // honeypot
+  };
+
+  // route through the Worker proxy — no token in the client
+  fetch(`${API_BASE}/contact`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.ok === true) {
+        ['nameInput', 'emailInput', 'subjectInput', 'descriptionInput'].forEach((id) => {
+          const el = document.getElementById(id); if (el) el.value = '';
+        });
+        flash(true);
+      } else {
+        flash(false);
+      }
+    })
+    .catch((error) => { console.error(error); flash(false); });
+}
 
 /*==================== MOBILE MENU (full-screen overlay) ====================*/
 (function mobileMenu() {
@@ -272,8 +282,10 @@ function openModal(project) {
 function fillOut(id, img) {
   setText('title', modalInfo[id].title);
   setText('info', modalInfo[id].info);
+  // project cover images were retired (they didn't match the projects) —
+  // keep the modal clean and text-led rather than showing a stray screenshot
   const imgTarget = document.getElementById('img');
-  if (imgTarget) imgTarget.src = img;
+  if (imgTarget) imgTarget.style.display = 'none';
   const site = document.getElementById('site');
   if (site) {
     const link = modalInfo[id].link;

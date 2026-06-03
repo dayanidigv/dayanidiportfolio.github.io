@@ -24,15 +24,20 @@
   ];
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Repeat visits in the same tab skip the full typed boot (just a quick flash),
+  // so the cinematic sequence delights once without nagging on every navigation.
+  let seen = false;
+  try { seen = sessionStorage.getItem('booted') === '1'; } catch (e) {}
 
   const setFill = (pct) => { if (fill) fill.style.width = pct + '%'; };
   const online = () => {
     if (status) { status.textContent = 'SYSTEMS ONLINE'; status.classList.add('online'); }
     setFill(100);
-    setTimeout(dismiss, reduce ? 250 : 520);
+    try { sessionStorage.setItem('booted', '1'); } catch (e) {}
+    setTimeout(dismiss, reduce || seen ? 220 : 520);
   };
 
-  if (reduce) {
+  if (reduce || seen) {
     term.innerHTML = lines.map((l) => '<span class="boot-line">' + l + '</span>').join('');
     online();
     return;
@@ -53,6 +58,45 @@
     }
   };
   setTimeout(step, 260); // let the brand fade in first
+}());
+
+
+/* ─── LENIS SMOOTH SCROLL ───────────────────────────────────────
+   Eased momentum scrolling — this is what makes the parallax *glide*
+   instead of step, and is the backbone of the Scrollytelling 2.0 feel.
+   Lenis scrolls the window, so every window-scroll-based effect here
+   (parallax field, hero parallax, progress bar) rides on the smoothed
+   position for free. Skipped for reduced-motion (native smooth instead). */
+(function smoothScroll() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (typeof Lenis === 'undefined') return;
+
+  const lenis = new Lenis({
+    duration: 1.15,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo-out
+    smoothWheel: true,
+    touchMultiplier: 1.6,
+  });
+  window.__lenis = lenis;
+
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  // anchor links glide (offset clears the fixed header)
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    const href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -72, duration: 1.3 });
+    });
+  });
+
+  // scroll-up button glides to the top instead of jumping
+  const up = document.getElementById('scroll-up');
+  if (up) up.addEventListener('click', (e) => { e.preventDefault(); lenis.scrollTo(0, { duration: 1.3 }); });
 }());
 
 
@@ -168,7 +212,7 @@
   const isTouch = window.matchMedia('(hover: none)').matches;
   // soften scroll drift on small screens, disable pointer drift on touch
   const mouseGain  = isTouch ? 0 : 1;
-  const scrollGain = isTouch ? 0.18 : 0.32;
+  const scrollGain = isTouch ? 0.35 : 0.7;
 
   let raf = null, mx = 0, my = 0, sy = 0;
 
@@ -176,7 +220,8 @@
     layers.forEach((el) => {
       const d = parseFloat(el.dataset.depth) || 0;
       const x = mx * d * mouseGain;
-      const y = my * d * mouseGain + sy * d * scrollGain;
+      // scroll drift scales with real pixels (sy capped at hero height)
+      const y = my * d * mouseGain + sy * (d / 100) * scrollGain;
       el.style.translate = x.toFixed(2) + 'px ' + y.toFixed(2) + 'px';
     });
     raf = null;
@@ -191,11 +236,11 @@
     }, { passive: true });
   }
 
-  // scroll drift — normalised against the hero's own height so it tracks
-  // the section moving out of frame, then idles once the hero is gone
+  // scroll drift in real pixels, capped at the hero's height so layers
+  // keep drifting as the hero leaves frame, then idle once it's gone
   const onScroll = () => {
     const h = home.offsetHeight || window.innerHeight;
-    sy = Math.max(0, Math.min(window.scrollY / h, 1.2));
+    sy = Math.min(window.scrollY, h);
     schedule();
   };
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -657,12 +702,23 @@
 
 /* ─── PROJECT INFRASTRUCTURE WORLDS ─────────────────────────────
    Section 6: each project reads as a deployed, operational service —
-   a persistent status strip (live OPERATIONAL + svc:// id) and a
-   topology grid that activates with a scan sweep on hover. Purely
-   additive decoration over the existing project cards + modal. */
+   a persistent status strip (live OPERATIONAL + svc:// id), a topology
+   grid that activates on hover, and a typed icon emblem replacing the
+   old (mismatched) screenshots so the visual matches the project. */
 (function projectWorlds() {
   const items = document.querySelectorAll('.work__container .item');
   if (!items.length) return;
+
+  // icon per card id (maps to the real project, not a stray screenshot)
+  const ICONS = {
+    1: 'uil uil-server-network',     // MCP Gateway
+    2: 'uil uil-mobile-android',     // FLAMES App
+    3: 'bx bxl-github',              // GitHub Automation
+    4: 'uil uil-lightbulb-alt',      // Li-Fi
+    5: 'uil uil-envelope-check',     // Apps Script Form Handler
+    6: 'bx bxl-telegram',            // Telegram Form Bot
+    7: 'uil uil-processor',          // Nile AI-thon
+  };
 
   items.forEach((item) => {
     if (item.querySelector('.pw-status')) return;
@@ -672,6 +728,10 @@
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '')
       .slice(0, 22);
+
+    // retire the mismatched cover image
+    const img = item.querySelector('img');
+    if (img) img.classList.add('pw-cover-hidden');
 
     const grid = document.createElement('div');
     grid.className = 'pw-grid';
@@ -684,8 +744,16 @@
       '<span class="pw-live"><span class="pw-dot"></span>OPERATIONAL</span>' +
       '<span class="pw-id">svc://' + id + '</span>';
 
+    const emblem = document.createElement('div');
+    emblem.className = 'pw-emblem';
+    emblem.setAttribute('aria-hidden', 'true');
+    emblem.innerHTML =
+      '<i class="' + (ICONS[item.id] || 'uil uil-apps') + '"></i>' +
+      '<span class="pw-emblem-name">' + name + '</span>';
+
     item.insertBefore(grid, item.firstChild);
     item.insertBefore(status, item.firstChild);
+    item.appendChild(emblem);
   });
 }());
 
@@ -760,4 +828,74 @@
       }, 1400);
     });
   }
+}());
+
+
+/* ─── PAGE-WIDE PARALLAX FIELD ──────────────────────────────────
+   Scrollytelling 2.0: faint infrastructure layers live behind ALL
+   content at different depths and drift at different speeds as you
+   scroll — so the environment moves like a camera travelling through
+   it, not a page that just reveals. Each layer's base position is
+   measured once (transform cleared) to avoid feedback; transforms are
+   applied in a rAF-throttled scroll loop. Disabled for reduced-motion. */
+(function parallaxField() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const main = document.querySelector('main.l-main');
+  if (!main || document.querySelector('.parallax-field')) return;
+
+  const A = '/assets/images/assets/';
+  // top is % down the full page; speed = parallax strength (±). Alternating
+  // sides + signs gives criss-cross depth as the journey unfolds.
+  const layers = [
+    { src: 'quantum-particle-swirl.webp',         top: '9%',  side: 'left:-8%',   w: 460, op: 0.20, speed:  0.42 },
+    { src: 'packet-flow-trails.webp',             top: '24%', side: 'right:-10%', w: 500, op: 0.17, speed: -0.34 },
+    { src: 'holographic-energy-beam.webp',        top: '40%', side: 'left:-6%',   w: 420, op: 0.20, speed:  0.48 },
+    { src: 'backend-pipeline-visualization.webp', top: '57%', side: 'right:-8%',  w: 480, op: 0.16, speed: -0.40 },
+    { src: 'holographic-service-pillar.webp',     top: '72%', side: 'left:-4%',   w: 360, op: 0.18, speed:  0.30 },
+    { src: 'glowing-mechanical-device.webp',      top: '87%', side: 'right:-7%',  w: 420, op: 0.18, speed: -0.44 },
+  ];
+
+  const field = document.createElement('div');
+  field.className = 'parallax-field';
+  field.setAttribute('aria-hidden', 'true');
+  field.innerHTML = layers.map((l) =>
+    '<img class="parallax-layer" loading="lazy" decoding="async" src="' + A + l.src + '" alt="" ' +
+    'style="top:' + l.top + ';' + l.side + ';width:' + l.w + 'px;opacity:' + l.op + '" data-speed="' + l.speed + '">'
+  ).join('');
+  main.insertBefore(field, main.firstChild);
+
+  const items = [].slice.call(field.querySelectorAll('.parallax-layer')).map((el) => ({
+    el, speed: parseFloat(el.dataset.speed) || 0, base: 0,
+  }));
+
+  // measure each layer's document-space centre with transforms cleared
+  const measure = () => {
+    items.forEach((it) => { it.el.style.transform = 'none'; });
+    const sy = window.scrollY;
+    items.forEach((it) => {
+      const r = it.el.getBoundingClientRect();
+      it.base = r.top + sy + r.height / 2;
+    });
+  };
+
+  let ticking = false;
+  const apply = () => {
+    const viewportCenter = window.scrollY + window.innerHeight / 2;
+    items.forEach((it) => {
+      const offset = viewportCenter - it.base;
+      it.el.style.transform = 'translate3d(0,' + (offset * it.speed).toFixed(1) + 'px,0)';
+    });
+    ticking = false;
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(apply); } };
+
+  let rt = null;
+  const onResize = () => { clearTimeout(rt); rt = setTimeout(() => { measure(); apply(); }, 150); };
+
+  // measure after layout settles (images may still be loading → re-measure on load)
+  const init = () => { measure(); apply(); };
+  init();
+  window.addEventListener('load', () => setTimeout(init, 200));
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize, { passive: true });
 }());
