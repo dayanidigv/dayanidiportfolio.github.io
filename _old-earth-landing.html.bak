@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Portfolio</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="keywords" content="dayanidi portfolio, coder, portfolio, projects, college student, Information Technology, KSR College of Engineering, Tiruchengode, dayanidi ksrce, KSRCE, KSREI, KSR Educational Institutions, higher education, India, dayanidi , dayanidi coder, daya, ">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<meta name="description" content="Welcome to my portfolio! I'm Dayanidi, a 19-year-old college student currently pursuing a B. Tech in Information Technology at KSR College of Engineering in Tiruchengode. With a burning passion for coding, I immerse myself in the world of web development and programming.  Through my portfolio, you'll discover my diverse range of projects, showcasing my skills in HTML, CSS, JavaScript, and more. Join me on this exciting journey as I continue to learn, grow, and transform ideas into reality. Let's create innovative solutions together!">
+		<meta name="author" content="Dayanidi">
+		<meta name="robots" content="index, follow">
+		<meta name="googlebot" content="index, follow">
+		<meta property="og:title" content="Portfolio">
+		<meta property="og:description" content="Welcome to my portfolio! I'm Dayanidi, a 19-year-old college student currently pursuing a B. Tech in Information Technology at KSR College of Engineering in Tiruchengode. With a burning passion for coding, I immerse myself in the world of web development and programming.  Through my portfolio, you'll discover my diverse range of projects, showcasing my skills in HTML, CSS, JavaScript, and more. Join me on this exciting journey as I continue to learn, grow, and transform ideas into reality. Let's create innovative solutions together!">
+		<meta property="og:type" content="website">
+		<meta name="google-site-verification" content="ztoq_Ne_44PsEAbPqi4zF0MxgqvVDffU6yZoUAxL63I" />
+		<script type="text/javascript">
+		    (function(c,l,a,r,i,t,y){
+		        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+		        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+		        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+		    })(window, document, "clarity", "script", "nhdiytkdut");
+		</script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+		<style>
+			*, ::before, ::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+			body {
+				margin: 0;
+				background-color: #070d1f;
+				color: #fff;
+				font-family: 'Poppins', sans-serif;
+				font-size: 14px;
+				line-height: 1.6;
+				overscroll-behavior: none;
+				overflow: hidden;
+			}
+
+			#info {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 10;
+				width: min(480px, 90vw);
+			}
+
+			.landing-card {
+				background: rgba(7, 13, 31, 0.78);
+				backdrop-filter: blur(24px);
+				-webkit-backdrop-filter: blur(24px);
+				border: 1px solid rgba(139, 92, 246, 0.18);
+				border-radius: 16px;
+				padding: 2.5rem 3rem;
+				text-align: center;
+				box-shadow: 0 0 80px rgba(139,92,246,0.06), 0 30px 80px rgba(0,0,0,0.65);
+			}
+
+			.stats-row {
+				display: flex;
+				justify-content: center;
+				gap: 0.6rem;
+				margin-bottom: 2rem;
+				flex-wrap: wrap;
+			}
+
+			.stat-chip {
+				display: flex;
+				align-items: center;
+				gap: 0.4rem;
+				background: rgba(255,255,255,0.04);
+				border: 1px solid rgba(255,255,255,0.07);
+				border-radius: 100px;
+				padding: 0.3rem 0.85rem;
+				font-size: 0.73rem;
+				font-family: 'JetBrains Mono', 'Courier New', monospace;
+			}
+
+			.stat-dot {
+				width: 6px; height: 6px;
+				border-radius: 50%;
+				flex-shrink: 0;
+			}
+			.stat-dot.total  { background: rgba(255,255,255,0.7); box-shadow: 0 0 6px rgba(255,255,255,0.4); }
+			.stat-dot.coder  { background: #a78bfa; box-shadow: 0 0 6px rgba(167,139,250,0.7); }
+			.stat-dot.normal { background: #00c8ff; box-shadow: 0 0 6px rgba(0,200,255,0.7); }
+
+			.stat-label { color: rgba(255,255,255,0.38); }
+			.stat-value { color: #fff; font-weight: 600; }
+
+			#question {
+				font-size: clamp(1.5rem, 5vw, 2rem);
+				color: #fff;
+				font-weight: 700;
+				margin-bottom: 0.4rem;
+				letter-spacing: -0.02em;
+				font-family: 'Poppins', sans-serif;
+			}
+
+			.landing-sub {
+				color: rgba(255,255,255,0.28);
+				font-size: 0.7rem;
+				letter-spacing: 2.5px;
+				text-transform: uppercase;
+				margin-bottom: 2.25rem;
+				font-family: 'JetBrains Mono', 'Courier New', monospace;
+			}
+
+			.landing-buttons {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.landing-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.75rem 2.25rem;
+				font-size: 0.9rem;
+				font-weight: 600;
+				letter-spacing: 1px;
+				border-radius: 8px;
+				transition: all 0.3s ease;
+				font-family: 'JetBrains Mono', 'Courier New', monospace;
+				text-decoration: none;
+				cursor: pointer;
+			}
+
+			.landing-btn.yes {
+				background: rgba(139,92,246,0.1);
+				color: #a78bfa;
+				border: 1px solid rgba(139,92,246,0.4);
+			}
+			.landing-btn.yes:hover {
+				background: rgba(139,92,246,0.2);
+				box-shadow: 0 0 24px rgba(139,92,246,0.3), 0 8px 24px rgba(0,0,0,0.3);
+				transform: translateY(-2px);
+				color: #a78bfa;
+				text-decoration: none;
+			}
+
+			.landing-btn.no {
+				background: rgba(0,200,255,0.08);
+				color: #00c8ff;
+				border: 1px solid rgba(0,200,255,0.3);
+			}
+			.landing-btn.no:hover {
+				background: rgba(0,200,255,0.16);
+				box-shadow: 0 0 24px rgba(0,200,255,0.28), 0 8px 24px rgba(0,0,0,0.3);
+				transform: translateY(-2px);
+				color: #00c8ff;
+				text-decoration: none;
+			}
+
+			.btn-tag {
+				font-size: 0.85rem;
+				opacity: 0.6;
+			}
+
+			@media (max-width: 420px) {
+				.landing-card { padding: 2rem 1.5rem; }
+				.landing-btn  { padding: 0.65rem 1.5rem; }
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="info">
+			<div class="landing-card">
+				<div class="stats-row">
+					<div class="stat-chip">
+						<span class="stat-dot total"></span>
+						<span class="stat-label">Total&nbsp;</span>
+						<span class="stat-value" id="total-views">—</span>
+					</div>
+					<div class="stat-chip">
+						<span class="stat-dot coder"></span>
+						<span class="stat-label">Coders&nbsp;</span>
+						<span class="stat-value" id="coder-views">—</span>
+					</div>
+					<div class="stat-chip">
+						<span class="stat-dot normal"></span>
+						<span class="stat-label">Others&nbsp;</span>
+						<span class="stat-value" id="normal-views">—</span>
+					</div>
+				</div>
+				<h1 id="question">Do you know coding?</h1>
+				<p class="landing-sub">choose your view</p>
+				<div class="landing-buttons">
+					<a href="/coderview" class="landing-btn yes">
+						<span class="btn-tag">&lt;/&gt;</span> Yes
+					</a>
+					<a href="/normalview" class="landing-btn no">
+						<span class="btn-tag">&#9679;</span> No
+					</a>
+				</div>
+			</div>
+		</div>
+
+
+		<script src="/assets/js/main.js"></script>
+		<script type="module">
+		import { db, doc,  getDoc, updateDoc } from "/assets/js/firebase.js";
+		  // Read data from the collection
+		  const readData = async () => {
+		 const documentRef = doc(db, "Portfolio", "B6MRUpOfbx86FX9cGDmB");
+	   try {
+   const documentSnapshot = await getDoc(documentRef);
+
+   if (documentSnapshot.exists()) {
+	 document.getElementById("total-views").innerHTML=documentSnapshot.data().totalviews;
+	 document.getElementById("coder-views").innerHTML=documentSnapshot.data().coderview;
+	 document.getElementById("normal-views").innerHTML=documentSnapshot.data().normalview;
+	 try {
+	 await updateDoc(documentRef,{
+			   totalviews:documentSnapshot.data().totalviews+1
+	 });
+	 console.log("Document successfully updated");
+   } catch (error) {
+	 console.error("Error updating document:", error);
+   }
+   } else {
+	 console.log("Document does not exist");
+   }
+ } catch (error) {
+   console.error("Error reading document:", error);
+ }
+ fetch('https://api.telegram.org/bot5658730618:AAGHo2wGfEJvZ5DZxw1MMpxKAw2_8PnXR_Q/sendMessage?chat_id=1221832086&text=Someone%20opened%20the%20portfolio')
+};
+ // Call the readData function when needed
+ readData();
+	   </script>
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "./threejs/three.module.js",
+					"three/addons/": "./threejs/jsm/"
+				}
+			}
+		</script>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+
+			import Stats from 'three/addons/libs/stats.module.js';
+
+			import { FlyControls } from 'three/addons/controls/FlyControls.js';
+			import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+			import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+			import { FilmPass } from 'three/addons/postprocessing/FilmPass.js';
+			import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+			import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShader.js';
+
+			const radius = 6371;
+			const tilt = 0.41;
+			const rotationSpeed = 0.02;
+
+			const cloudsScale = 1.005;
+			const moonScale = 0.23;
+
+			const MARGIN = 0;
+			let SCREEN_HEIGHT = window.innerHeight - MARGIN * 2;
+			let SCREEN_WIDTH = window.innerWidth;
+
+			let camera, controls, scene, renderer, stats;
+			let geometry, meshPlanet, meshClouds, meshMoon;
+			let dirLight;
+
+			let composer;
+
+			const textureLoader = new THREE.TextureLoader();
+
+			let d, dPlanet, dMoon;
+			const dMoonVec = new THREE.Vector3();
+
+			const clock = new THREE.Clock();
+
+			init();
+			animate();
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 25, SCREEN_WIDTH / SCREEN_HEIGHT, 50, 1e7 );
+				camera.position.z = radius * 5;
+
+				scene = new THREE.Scene();
+				scene.fog = new THREE.FogExp2( 0x000000, 0.00000025 );
+
+				dirLight = new THREE.DirectionalLight( 0xffffff );
+				dirLight.position.set( - 1, 0, 1 ).normalize();
+				scene.add( dirLight );
+
+				const materialNormalMap = new THREE.MeshPhongMaterial( {
+
+					specular: 0x7c7c7c,
+					shininess: 15,
+					map: textureLoader.load( 'textures/planets/earth_atmos_2048.jpg' ),
+					specularMap: textureLoader.load( 'textures/planets/earth_specular_2048.jpg' ),
+					normalMap: textureLoader.load( 'textures/planets/earth_normal_2048.jpg' ),
+
+					// y scale is negated to compensate for normal map handedness.
+					normalScale: new THREE.Vector2( 0.85, - 0.85 )
+
+				} );
+				materialNormalMap.map.colorSpace = THREE.SRGBColorSpace;
+
+				// planet
+
+				geometry = new THREE.SphereGeometry( radius, 100, 50 );
+
+				meshPlanet = new THREE.Mesh( geometry, materialNormalMap );
+				meshPlanet.rotation.y = 0;
+				meshPlanet.rotation.z = tilt;
+				scene.add( meshPlanet );
+
+				// clouds
+
+				const materialClouds = new THREE.MeshLambertMaterial( {
+
+					map: textureLoader.load( 'textures/planets/earth_clouds_1024.png' ),
+					transparent: true
+
+				} );
+				materialClouds.map.colorSpace = THREE.SRGBColorSpace;
+
+				meshClouds = new THREE.Mesh( geometry, materialClouds );
+				meshClouds.scale.set( cloudsScale, cloudsScale, cloudsScale );
+				meshClouds.rotation.z = tilt;
+				scene.add( meshClouds );
+
+				// moon
+
+				const materialMoon = new THREE.MeshPhongMaterial( {
+
+					map: textureLoader.load( 'textures/planets/moon_1024.jpg' )
+
+				} );
+				materialMoon.map.colorSpace = THREE.SRGBColorSpace;
+
+				meshMoon = new THREE.Mesh( geometry, materialMoon );
+				meshMoon.position.set( radius * 5, 0, 0 );
+				meshMoon.scale.set( moonScale, moonScale, moonScale );
+				scene.add( meshMoon );
+
+				// stars
+
+				const r = radius, starsGeometry = [ new THREE.BufferGeometry(), new THREE.BufferGeometry() ];
+
+				const vertices1 = [];
+				const vertices2 = [];
+
+				const vertex = new THREE.Vector3();
+
+				for ( let i = 0; i < 250; i ++ ) {
+
+					vertex.x = Math.random() * 2 - 1;
+					vertex.y = Math.random() * 2 - 1;
+					vertex.z = Math.random() * 2 - 1;
+					vertex.multiplyScalar( r );
+
+					vertices1.push( vertex.x, vertex.y, vertex.z );
+
+				}
+
+				for ( let i = 0; i < 1500; i ++ ) {
+
+					vertex.x = Math.random() * 2 - 1;
+					vertex.y = Math.random() * 2 - 1;
+					vertex.z = Math.random() * 2 - 1;
+					vertex.multiplyScalar( r );
+
+					vertices2.push( vertex.x, vertex.y, vertex.z );
+
+				}
+
+				starsGeometry[ 0 ].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices1, 3 ) );
+				starsGeometry[ 1 ].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices2, 3 ) );
+
+				const starsMaterials = [
+					new THREE.PointsMaterial( { color: 0x9c9c9c, size: 2, sizeAttenuation: false } ),
+					new THREE.PointsMaterial( { color: 0x9c9c9c, size: 1, sizeAttenuation: false } ),
+					new THREE.PointsMaterial( { color: 0x7c7c7c, size: 2, sizeAttenuation: false } ),
+					new THREE.PointsMaterial( { color: 0x838383, size: 1, sizeAttenuation: false } ),
+					new THREE.PointsMaterial( { color: 0x5a5a5a, size: 2, sizeAttenuation: false } ),
+					new THREE.PointsMaterial( { color: 0x5a5a5a, size: 1, sizeAttenuation: false } )
+				];
+
+				for ( let i = 10; i < 30; i ++ ) {
+
+					const stars = new THREE.Points( starsGeometry[ i % 2 ], starsMaterials[ i % 6 ] );
+
+					stars.rotation.x = Math.random() * 6;
+					stars.rotation.y = Math.random() * 6;
+					stars.rotation.z = Math.random() * 6;
+					stars.scale.setScalar( i * 10 );
+
+					stars.matrixAutoUpdate = false;
+					stars.updateMatrix();
+
+					scene.add( stars );
+
+				}
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+				document.body.appendChild( renderer.domElement );
+
+				//
+
+				controls = new FlyControls( camera, renderer.domElement );
+				controls.movementSpeed = 1000;
+				controls.domElement = renderer.domElement;
+				controls.rollSpeed = Math.PI / 24;
+				controls.autoForward = false;
+				controls.dragToLook = false;
+
+				//
+
+				
+
+				window.addEventListener( 'resize', onWindowResize );
+
+				// postprocessing
+
+				const renderModel = new RenderPass( scene, camera );
+				const effectFilm = new FilmPass( 0.35, 0.75, 2048, false );
+				const gammaCorrection = new ShaderPass( GammaCorrectionShader );
+
+				composer = new EffectComposer( renderer );
+
+				composer.addPass( renderModel );
+				composer.addPass( effectFilm );
+				composer.addPass( gammaCorrection );
+
+			}
+
+			function onWindowResize() {
+
+				SCREEN_HEIGHT = window.innerHeight;
+				SCREEN_WIDTH = window.innerWidth;
+
+				camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+				composer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+			}
+
+			function render() {
+
+				// rotate the planet and clouds
+
+				const delta = clock.getDelta();
+
+				meshPlanet.rotation.y += rotationSpeed * delta;
+				meshClouds.rotation.y += 1.25 * rotationSpeed * delta;
+
+				// slow down as we approach the surface
+
+				dPlanet = camera.position.length();
+
+				dMoonVec.subVectors( camera.position, meshMoon.position );
+				dMoon = dMoonVec.length();
+
+				if ( dMoon < dPlanet ) {
+
+					d = ( dMoon - radius * moonScale * 1.01 );
+
+				} else {
+
+					d = ( dPlanet - radius * 1.01 );
+
+				}
+
+				controls.movementSpeed = 0.33 * d;
+				controls.update( delta );
+
+				composer.render( delta );
+
+			}
+
+		</script>
+	</body>
+</html>
+

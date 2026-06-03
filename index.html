@@ -1,403 +1,793 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Portfolio</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="keywords" content="dayanidi portfolio, coder, portfolio, projects, college student, Information Technology, KSR College of Engineering, Tiruchengode, dayanidi ksrce, KSRCE, KSREI, KSR Educational Institutions, higher education, India, dayanidi , dayanidi coder, daya, ">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		<meta name="description" content="Welcome to my portfolio! I'm Dayanidi, a 19-year-old college student currently pursuing a B. Tech in Information Technology at KSR College of Engineering in Tiruchengode. With a burning passion for coding, I immerse myself in the world of web development and programming.  Through my portfolio, you'll discover my diverse range of projects, showcasing my skills in HTML, CSS, JavaScript, and more. Join me on this exciting journey as I continue to learn, grow, and transform ideas into reality. Let's create innovative solutions together!">
-		<meta name="author" content="Dayanidi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Dayanidi Vadivel, backend engineer, network automation, Python, infrastructure, Nile, portfolio, systems engineer, Docker, Kubernetes, AWS, automation, full-stack developer">
+		<meta name="description" content="Dayanidi Vadivel · Backend Systems Engineer at Nile, building large-scale network infrastructure, automation, and anomaly detection systems. B.Tech IT graduate, CTO & Co-founder experience, full-stack developer.">
+		<meta name="author" content="Dayanidi Vadivel">
 		<meta name="robots" content="index, follow">
 		<meta name="googlebot" content="index, follow">
-		<meta property="og:title" content="Portfolio">
-		<meta property="og:description" content="Welcome to my portfolio! I'm Dayanidi, a 19-year-old college student currently pursuing a B. Tech in Information Technology at KSR College of Engineering in Tiruchengode. With a burning passion for coding, I immerse myself in the world of web development and programming.  Through my portfolio, you'll discover my diverse range of projects, showcasing my skills in HTML, CSS, JavaScript, and more. Join me on this exciting journey as I continue to learn, grow, and transform ideas into reality. Let's create innovative solutions together!">
+		<meta property="og:title" content="Dayanidi Vadivel | Backend Systems Engineer">
+		<meta property="og:description" content="Dayanidi Vadivel · Backend Systems Engineer at Nile, building large-scale network infrastructure, automation, and anomaly detection systems. B.Tech IT graduate, CTO & Co-founder experience, full-stack developer.">
 		<meta property="og:type" content="website">
 		<meta name="google-site-verification" content="ztoq_Ne_44PsEAbPqi4zF0MxgqvVDffU6yZoUAxL63I" />
-		<script type="text/javascript">
-		    (function(c,l,a,r,i,t,y){
-		        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-		        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-		        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-		    })(window, document, "clarity", "script", "nhdiytkdut");
-		</script>
-		<style>
-			body {
-				margin: 0;
-				background-color: #000;
-				color: #fff;
-				font-family: Monospace;
-				font-size: 13px;
-				line-height: 24px;
-				overscroll-behavior: none;
-				overflow: hidden;
-			}
-			#info {
-				position: absolute;
-				top:50%;
-				left:50%;
-				transform: translate(-50%,-50%);
-			}
-			p{
-				font-size:103%;
-				font-weight: bold;
-			}
-			#question{
-				font-size:250%;
-				
-			}
-			a{
-				color: #eee;
-				font-weight: bold;
-				padding:2%;
-				letter-spacing :3px;
-				font-size: large;
-				border-radius: 5px;
-				text-decoration: none;
-			}
-			a:hover{
-				text-decoration: none;
-				color: #fff;
-			}
-			.yes{
-				background-color: rgb(21, 255, 0);
-			}
-			.no{
-				background-color: rgb(255, 0, 0);
-				padding-left: 4%;
-				padding-right: 3%;
-			}
-		</style>
-	</head>
-
-	<body>
-		<div id="info">
-			<div class="row">
-				<div class="col-12">
-				  <div class="message-container">
-					<div class="message">
-						 <div class="row">
-						<div class="col-4 mb-5 text-primary text-center">                  
-							  <p class="">Total Views</p>
-							  <p id="total-views">loading...</p>
-						</div>
-						<div class="col-4 mb-5 text-danger text-center">
-							  <p class="">Coder Views</p>
-							  <p id="coder-views">loading...</p>
-						</div>
-						<div class="col-4 mb-5 text-warning text-center">
-							  <p class="">Normal Views</p>
-							  <p id="normal-views">loading..</p>
-						</div>
-					  </div>
-					  <div class="text-center">
-						<b class="text-center" id="question">Do you know coding?</b>
-					  </div>
-					  
-					  <div class="mt-5 text-center">
-						<a href="/coderview" class="yes mr-5">Yes</a><a href="normalview" class= "no ml-5">No</a>
-					  </div>
-					</div>
-				  </div>
-				</div>
-		</div>
-
-
-		<script src="/assets/js/main.js"></script>
-		<script type="module">
-		import { db, doc,  getDoc, updateDoc } from "/assets/js/firebase.js";
-		  // Read data from the collection
-		  const readData = async () => {
-		 const documentRef = doc(db, "Portfolio", "B6MRUpOfbx86FX9cGDmB");
-	   try {
-   const documentSnapshot = await getDoc(documentRef);
-
-   if (documentSnapshot.exists()) {
-	 document.getElementById("total-views").innerHTML=documentSnapshot.data().totalviews;
-	 document.getElementById("coder-views").innerHTML=documentSnapshot.data().coderview;
-	 document.getElementById("normal-views").innerHTML=documentSnapshot.data().normalview;
-	 try {
-	 await updateDoc(documentRef,{
-			   totalviews:documentSnapshot.data().totalviews+1
-	 });
-	 console.log("Document successfully updated");
-   } catch (error) {
-	 console.error("Error updating document:", error);
-   }
-   } else {
-	 console.log("Document does not exist");
-   }
- } catch (error) {
-   console.error("Error reading document:", error);
- }
- fetch('https://api.telegram.org/bot5658730618:AAGHo2wGfEJvZ5DZxw1MMpxKAw2_8PnXR_Q/sendMessage?chat_id=1221832086&text=Someone%20opened%20the%20portfolio')
-};
- // Call the readData function when needed
- readData();
-	   </script>
-		<!-- Import maps polyfill -->
-		<!-- Remove this when import maps will be widely supported -->
-		<script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "./threejs/three.module.js",
-					"three/addons/": "./threejs/jsm/"
-				}
-			}
-		</script>
-
-		<script type="module">
-
-			import * as THREE from 'three';
-
-			import Stats from 'three/addons/libs/stats.module.js';
-
-			import { FlyControls } from 'three/addons/controls/FlyControls.js';
-			import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-			import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-			import { FilmPass } from 'three/addons/postprocessing/FilmPass.js';
-			import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-			import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShader.js';
-
-			const radius = 6371;
-			const tilt = 0.41;
-			const rotationSpeed = 0.02;
-
-			const cloudsScale = 1.005;
-			const moonScale = 0.23;
-
-			const MARGIN = 0;
-			let SCREEN_HEIGHT = window.innerHeight - MARGIN * 2;
-			let SCREEN_WIDTH = window.innerWidth;
-
-			let camera, controls, scene, renderer, stats;
-			let geometry, meshPlanet, meshClouds, meshMoon;
-			let dirLight;
-
-			let composer;
-
-			const textureLoader = new THREE.TextureLoader();
-
-			let d, dPlanet, dMoon;
-			const dMoonVec = new THREE.Vector3();
-
-			const clock = new THREE.Clock();
-
-			init();
-			animate();
-
-			function init() {
-
-				camera = new THREE.PerspectiveCamera( 25, SCREEN_WIDTH / SCREEN_HEIGHT, 50, 1e7 );
-				camera.position.z = radius * 5;
-
-				scene = new THREE.Scene();
-				scene.fog = new THREE.FogExp2( 0x000000, 0.00000025 );
-
-				dirLight = new THREE.DirectionalLight( 0xffffff );
-				dirLight.position.set( - 1, 0, 1 ).normalize();
-				scene.add( dirLight );
-
-				const materialNormalMap = new THREE.MeshPhongMaterial( {
-
-					specular: 0x7c7c7c,
-					shininess: 15,
-					map: textureLoader.load( 'textures/planets/earth_atmos_2048.jpg' ),
-					specularMap: textureLoader.load( 'textures/planets/earth_specular_2048.jpg' ),
-					normalMap: textureLoader.load( 'textures/planets/earth_normal_2048.jpg' ),
-
-					// y scale is negated to compensate for normal map handedness.
-					normalScale: new THREE.Vector2( 0.85, - 0.85 )
-
-				} );
-				materialNormalMap.map.colorSpace = THREE.SRGBColorSpace;
-
-				// planet
-
-				geometry = new THREE.SphereGeometry( radius, 100, 50 );
-
-				meshPlanet = new THREE.Mesh( geometry, materialNormalMap );
-				meshPlanet.rotation.y = 0;
-				meshPlanet.rotation.z = tilt;
-				scene.add( meshPlanet );
-
-				// clouds
-
-				const materialClouds = new THREE.MeshLambertMaterial( {
-
-					map: textureLoader.load( 'textures/planets/earth_clouds_1024.png' ),
-					transparent: true
-
-				} );
-				materialClouds.map.colorSpace = THREE.SRGBColorSpace;
-
-				meshClouds = new THREE.Mesh( geometry, materialClouds );
-				meshClouds.scale.set( cloudsScale, cloudsScale, cloudsScale );
-				meshClouds.rotation.z = tilt;
-				scene.add( meshClouds );
-
-				// moon
-
-				const materialMoon = new THREE.MeshPhongMaterial( {
-
-					map: textureLoader.load( 'textures/planets/moon_1024.jpg' )
-
-				} );
-				materialMoon.map.colorSpace = THREE.SRGBColorSpace;
-
-				meshMoon = new THREE.Mesh( geometry, materialMoon );
-				meshMoon.position.set( radius * 5, 0, 0 );
-				meshMoon.scale.set( moonScale, moonScale, moonScale );
-				scene.add( meshMoon );
-
-				// stars
-
-				const r = radius, starsGeometry = [ new THREE.BufferGeometry(), new THREE.BufferGeometry() ];
-
-				const vertices1 = [];
-				const vertices2 = [];
-
-				const vertex = new THREE.Vector3();
-
-				for ( let i = 0; i < 250; i ++ ) {
-
-					vertex.x = Math.random() * 2 - 1;
-					vertex.y = Math.random() * 2 - 1;
-					vertex.z = Math.random() * 2 - 1;
-					vertex.multiplyScalar( r );
-
-					vertices1.push( vertex.x, vertex.y, vertex.z );
-
-				}
-
-				for ( let i = 0; i < 1500; i ++ ) {
-
-					vertex.x = Math.random() * 2 - 1;
-					vertex.y = Math.random() * 2 - 1;
-					vertex.z = Math.random() * 2 - 1;
-					vertex.multiplyScalar( r );
-
-					vertices2.push( vertex.x, vertex.y, vertex.z );
-
-				}
-
-				starsGeometry[ 0 ].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices1, 3 ) );
-				starsGeometry[ 1 ].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices2, 3 ) );
-
-				const starsMaterials = [
-					new THREE.PointsMaterial( { color: 0x9c9c9c, size: 2, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x9c9c9c, size: 1, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x7c7c7c, size: 2, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x838383, size: 1, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x5a5a5a, size: 2, sizeAttenuation: false } ),
-					new THREE.PointsMaterial( { color: 0x5a5a5a, size: 1, sizeAttenuation: false } )
-				];
-
-				for ( let i = 10; i < 30; i ++ ) {
-
-					const stars = new THREE.Points( starsGeometry[ i % 2 ], starsMaterials[ i % 6 ] );
-
-					stars.rotation.x = Math.random() * 6;
-					stars.rotation.y = Math.random() * 6;
-					stars.rotation.z = Math.random() * 6;
-					stars.scale.setScalar( i * 10 );
-
-					stars.matrixAutoUpdate = false;
-					stars.updateMatrix();
-
-					scene.add( stars );
-
-				}
-
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-				document.body.appendChild( renderer.domElement );
-
-				//
-
-				controls = new FlyControls( camera, renderer.domElement );
-				controls.movementSpeed = 1000;
-				controls.domElement = renderer.domElement;
-				controls.rollSpeed = Math.PI / 24;
-				controls.autoForward = false;
-				controls.dragToLook = false;
-
-				//
-
-				
-
-				window.addEventListener( 'resize', onWindowResize );
-
-				// postprocessing
-
-				const renderModel = new RenderPass( scene, camera );
-				const effectFilm = new FilmPass( 0.35, 0.75, 2048, false );
-				const gammaCorrection = new ShaderPass( GammaCorrectionShader );
-
-				composer = new EffectComposer( renderer );
-
-				composer.addPass( renderModel );
-				composer.addPass( effectFilm );
-				composer.addPass( gammaCorrection );
-
-			}
-
-			function onWindowResize() {
-
-				SCREEN_HEIGHT = window.innerHeight;
-				SCREEN_WIDTH = window.innerWidth;
-
-				camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-				composer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-
-			}
-
-			function animate() {
-				requestAnimationFrame( animate );
-				render();
-			}
-
-			function render() {
-
-				// rotate the planet and clouds
-
-				const delta = clock.getDelta();
-
-				meshPlanet.rotation.y += rotationSpeed * delta;
-				meshClouds.rotation.y += 1.25 * rotationSpeed * delta;
-
-				// slow down as we approach the surface
-
-				dPlanet = camera.position.length();
-
-				dMoonVec.subVectors( camera.position, meshMoon.position );
-				dMoon = dMoonVec.length();
-
-				if ( dMoon < dPlanet ) {
-
-					d = ( dMoon - radius * moonScale * 1.01 );
-
-				} else {
-
-					d = ( dPlanet - radius * 1.01 );
-
-				}
-
-				controls.movementSpeed = 0.33 * d;
-				controls.update( delta );
-
-				composer.render( delta );
-
-			}
-
-		</script>
-	</body>
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "nhdiytkdut");
+</script>
+        <!--==================== SWIPER CSS ====================-->
+        <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+        
+        <!-- =====BOX ICONS===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <!-- =====DEVICONS===== -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css"/>
+         
+        <!--==================== UNICONS ====================-->
+         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+        <title>Dayanidi Vadivel | Backend Systems Engineer</title>
+    </head>
+    <body class="text-white" style="background: linear-gradient(135deg, #070d1f 0%, #0d1535 60%, #0f0a2e 100%);">
+
+         <!-- Scroll progress -->
+         <div class="nav-progress" id="nav-progress"></div>
+
+         <!--==================== HEADER ====================-->
+         <header class="site-header" id="site-header">
+            <nav class="nav-shell">
+
+              <!-- Logo -->
+              <a href="#home" class="nav-logo">
+                <span class="nav-logo-mark"><i class="uil uil-brackets-curly"></i></span>
+                <span class="nav-logo-text"></span>
+              </a>
+
+              <!-- Desktop menu -->
+              <ul class="nav-menu">
+                <li><a href="#home" class="nav-item-link active">Home</a></li>
+                <li><a href="#about" class="nav-item-link">About</a></li>
+                <li><a href="#qualification" class="nav-item-link">Education</a></li>
+                <li><a href="#experience" class="nav-item-link">Experience</a></li>
+                <li><a href="#skills" class="nav-item-link">Skills</a></li>
+                <li><a href="#portfolio" class="nav-item-link">Work</a></li>
+              </ul>
+
+              <!-- Actions -->
+              <div class="nav-actions">
+                <span class="nav-status"><span class="status-dot"></span> Systems online</span>
+                <a href="#contact" class="nav-cta"><i class="uil uil-message"></i><span class="cta-text">Contact</span></a>
+                <button class="nav-burger" id="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+              </div>
+
+            </nav>
+          </header>
+
+          <!-- Mobile full-screen menu -->
+          <div class="mobile-menu" id="mobile-menu">
+            <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu"><i class="uil uil-times"></i></button>
+            <a href="#home" class="mobile-link active"><span>01</span>Home</a>
+            <a href="#about" class="mobile-link"><span>02</span>About</a>
+            <a href="#qualification" class="mobile-link"><span>03</span>Education</a>
+            <a href="#experience" class="mobile-link"><span>04</span>Experience</a>
+            <a href="#skills" class="mobile-link"><span>05</span>Skills</a>
+            <a href="#portfolio" class="mobile-link"><span>06</span>Work</a>
+            <a href="#contact" class="mobile-link"><span>07</span>Contact</a>
+            <div class="mobile-menu-footer">
+              <a href="" data-social="linkedin" target="_blank" rel="noopener"><i class="bx bxl-linkedin"></i></a>
+              <a href="" data-social="github" target="_blank" rel="noopener"><i class="bx bxl-github"></i></a>
+            </div>
+          </div>
+        <main class="l-main">
+
+              <!--===== Loading... =====-->
+          <div class="loader" id="loader">
+                        <div class="boot" role="status" aria-label="Loading">
+              <div class="boot-brand"><span class="boot-mark">&lt;/&gt;</span><span class="boot-brand-text">DAYANIDI<span class="boot-sep">::</span>SYSTEMS</span></div>
+              <div class="boot-terminal" id="boot-terminal" aria-hidden="true"></div>
+              <div class="boot-bar"><span class="boot-bar-fill" id="boot-bar-fill"></span></div>
+              <div class="boot-status" id="boot-status">INITIALIZING</div>
+            </div>
+          </div>
+         
+          <!--===== HOME =====-->
+            <section class="home bd-grid" id="home">
+              <div>
+                <!-- Ambient infrastructure background -->
+                <div class="hero-bg" aria-hidden="true">
+                  <img class="hero-bg-mesh" data-depth="6" loading="lazy" decoding="async" src="/assets/images/assets/service-mesh-visuals.webp" alt="">
+                  <img class="hero-bg-rain" data-depth="10" loading="lazy" decoding="async" src="/assets/images/assets/digital-rain-streams.webp" alt="">
+                  <img class="hero-bg-grid" data-depth="4" loading="lazy" decoding="async" src="/assets/images/assets/holographic-grid-floor.webp" alt="">
+                </div>
+                <div class="row align-items-center">
+
+                  <!-- LEFT: greeting + name + terminal + SQL + social -->
+                  <div class="col-lg-6 px-4">
+                    <div id="coder1">
+
+                      <p class="hero-greeting">Hello, I'm</p>
+                      <h1 class="hero-name">
+                        <span class="name-white">Dayanidi </span><span class="name-purple">Vadivel</span>
+                      </h1>
+                      <p class="hero-role"><strong>Backend</strong> Systems Engineer</p>
+
+                      <p class="sql mb-3" style="font-size: clamp(0.6rem, 2.4vw, 0.75rem); color: #64748b; padding: 0.5rem 1rem; display: inline-block; max-width: 100%; overflow-x: auto;">
+                        <span style="color: #a78bfa;">dayanidi</span><span style="color: #60a5fa;">@nile</span><span style="color: #64748b;">:~$</span>
+                        <span style="color: #e2e8f0; margin-left: 0.5rem;">query --who-am-i</span>
+                      </p>
+
+                      <div class="home__data sql" style="padding: 1.1rem 1.25rem; font-size: clamp(0.56rem, 2.55vw, 0.9rem); display: inline-block; max-width: 100%; overflow-x: auto;">
+                        <span style="color: #60a5fa;">SELECT</span> <span style="color: #e2e8f0;">*</span> <span style="color: #60a5fa;">FROM</span> <span style="color: #e2e8f0; animation: glowgreen 2s infinite;">engineers</span> <span style="color: #60a5fa;">WHERE</span><br>
+                        &nbsp;&nbsp;<span style="color: #e2e8f0;">name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">LIKE</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'%<span class="nametag"></span>%'</span> <span style="color: #60a5fa;">AND</span><br>
+                        &nbsp;&nbsp;<span style="color: #e2e8f0;">role</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">=</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'Backend_Systems_Engineer'</span> <span style="color: #60a5fa;">AND</span><br>
+                        &nbsp;&nbsp;<span style="color: #e2e8f0;">company</span>  <span style="color: #60a5fa;">=</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'Nile'</span> <span style="color: #60a5fa;">AND</span><br>
+                        &nbsp;&nbsp;<span style="color: #e2e8f0;">specialty</span> <span style="color: #60a5fa;">IN</span> <span style="color: #64748b;">(</span><span style="color: #a78bfa;">'Automation'</span><span style="color: #64748b;">,</span> <span style="color: #a78bfa;">'Scale'</span><span style="color: #64748b;">,</span> <span style="color: #a78bfa;">'Reliability'</span><span style="color: #64748b;">)</span><span style="color: #60a5fa;">;</span>
+                      </div>
+
+                    </div>
+
+                    <div class="home__social mt-4">
+                      <a href="" data-social="linkedin" class="home__social-icon" target="_blank" rel="noopener"><i class='bx bxl-linkedin'></i></a>
+                      <a href="" data-social="github" class="home__social-icon" target="_blank" rel="noopener"><i class='bx bxl-github'></i></a>
+                    </div>
+                    <a href="#contact" class="button mb-5">
+                      Contact Me &nbsp;<i class="uil uil-message"></i>
+                    </a>
+                  </div>
+
+                  <!-- RIGHT: holographic operator stage -->
+                  <div class="col-lg-6 hero-stage-col">
+                    <div class="hero-stage">
+
+                      <!-- infrastructure framing behind the operator -->
+                      <img class="hero-asset asset-orbit" data-depth="5" loading="lazy" decoding="async" src="/assets/images/assets/orbit-rings.webp" alt="" aria-hidden="true">
+                      <img class="hero-asset asset-halo"  data-depth="3" loading="lazy" decoding="async" src="/assets/images/assets/ai-infrastructure-halo.webp" alt="" aria-hidden="true">
+
+                      <!-- the operator -->
+                      <div class="hero-portrait">
+                        <span class="hero-portrait-base" aria-hidden="true"></span>
+                        <img src="/assets/images/dayanidi-portrait.webp" alt="Dayanidi Vadivel" width="256" height="297">
+                        <span class="hero-portrait-scan" aria-hidden="true"></span>
+                      </div>
+
+                      <!-- contained telemetry chips -->
+                      <div class="hero-chip chip-auto"><i class="uil uil-bolt-alt"></i><span>Automation</span></div>
+                      <div class="hero-chip chip-scale"><i class="uil uil-chart-bar"></i><span>Scale</span></div>
+                      <div class="hero-chip chip-rel"><i class="uil uil-shield-check"></i><span>Reliability</span></div>
+
+                      <!-- grounded uptime readout -->
+                      <div class="hero-uptime">
+                        <span class="hu-prompt"><span class="hu-dot"></span>$ uptime</span>
+                        <span class="hu-body"><b id="uptime-days">&mdash;</b> live &middot; <b>0</b> incidents &middot; building</span>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- scroll cue — invites the journey -->
+              <a href="#about" class="hero-scroll-cue" aria-label="Scroll to begin">
+                <span class="hsc-text">Scroll to initialize</span>
+                <span class="hsc-mouse"><span class="hsc-wheel"></span></span>
+              </a>
+            </section>
+            <!--===== ABOUT =====-->
+            <section class="about section" id="about">
+                <h2 class="section-title">About Me</h2>
+
+                <div class="container">
+                  <div class="row align-items-center">
+
+                    <!-- LEFT: intro text -->
+                    <div class="col-lg-5 mb-4 mb-lg-0">
+                      <p class="section-tag">/// WHO I AM</p>
+                      <h2 class="about__subtitle" style="font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; line-height: 1.25;">
+                        Building systems that work at <span style="color: #a78bfa; animation: glowgreen 2s infinite;">scale.</span>
+                      </h2>
+                      <h4 class="about__subtitle" style="color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-bottom: 1rem;">
+                        Currently: <span style="color: #a78bfa;" id="word"></span><span class="blink">|</span>
+                      </h4>
+                      <p style="color: #94a3b8; line-height: 1.8; font-size: 0.92rem;">
+                        I work on backend systems, automation, and large-scale infrastructure,
+                        designing solutions that stay reliable under real-world, high-volume workloads.
+                      </p>
+                    </div>
+
+                    <!-- RIGHT: SQL profile card (macOS editor) -->
+                    <div class="col-lg-7">
+                      <div class="code-editor">
+                        <div class="code-editor-bar">
+                          <div class="code-dots">
+                            <span class="code-dot red"></span>
+                            <span class="code-dot yellow"></span>
+                            <span class="code-dot green"></span>
+                          </div>
+                          <span class="code-lang">profile.sql</span>
+                        </div>
+                        <div class="code-editor-body">
+                          <span style="color: #60a5fa;">UPDATE</span>
+                          <span style="color: #e2e8f0;"> engineer</span>
+                          <span style="color: #60a5fa;"> SET</span><br>
+                          &nbsp;&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class='json-key'>'<span id="name"></span>'</span>,<br>
+                          &nbsp;&nbsp;age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span style="color: #c084fc;"><span id="age"></span></span>,<br>
+                          &nbsp;&nbsp;role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class='json-key'>'<span id="occupation"></span>'</span>,<br>
+                          &nbsp;&nbsp;status&nbsp;&nbsp;&nbsp;= <span class='json-key'>'<span id="year"></span> · B.Tech IT'</span>,<br>
+                          &nbsp;&nbsp;company&nbsp;&nbsp;= <span class='json-key'>'Nile'</span>,<br>
+                          &nbsp;&nbsp;focus&nbsp;&nbsp;&nbsp;&nbsp;= <span class='json-key'>'Automation · Scale · Reliability'</span>,<br>
+                          &nbsp;&nbsp;location&nbsp;= <span class='json-key'>'Salem, Tamilnadu'</span><br>
+                          <span style="color: #60a5fa;">WHERE</span>
+                          <span style="color: #e2e8f0;"> id</span>
+                          <span style="color: #60a5fa;"> =</span>
+                          <span style="color: #a78bfa;"> 'GV_Dayanidi'</span><span style="color: #60a5fa;">;</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+            </section>
+
+            <!--===== Qualification =====-->
+            <section class="qualification section" id="qualification">
+              <div class="qual-section-bg"></div>
+              <div class="container qual-content">
+
+                <p class="qual-section-tag">Qualification</p>
+                <h2 class="qual-hero-title">My Academic <span class="qual-hl">Journey</span></h2>
+                <p class="qual-hero-sub">The foundation that fuels my passion for building <span>robust systems</span>.</p>
+                <div class="qual-divider"></div>
+
+                <div class="qual-new-timeline">
+
+                  <!-- B.Tech -->
+                  <div class="qual-new-row">
+                    <div class="qual-icon-col">
+                      <div class="qual-circle-icon">
+                        <i class="uil uil-graduation-cap"></i>
+                      </div>
+                      <div class="qual-connector">
+                        <span class="qual-connector-dot"></span>
+                      </div>
+                    </div>
+                    <div class="qual-new-card">
+                      <div class="qual-new-card-inner">
+                        <div class="qual-card-left">
+                          <div class="qual-new-year">2021 &ndash; 2025</div>
+                          <div class="qual-new-degree">B.Tech in Information Technology</div>
+                          <div class="qual-new-institution">K.S.R College of Engineering, Tiruchengode</div>
+                          <div class="qual-meta-row">
+                            <span class="qual-score">CGPA <span id="cgpatag">7.5</span></span>
+                            <span class="qual-chip cyan">Graduated</span>
+                            <span class="qual-chip purple">B.Tech &middot; IT</span>
+                          </div>
+                        </div>
+                        <div class="qual-icon-box"><i class="uil uil-university"></i></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- HSC -->
+                  <div class="qual-new-row">
+                    <div class="qual-icon-col">
+                      <div class="qual-circle-icon">
+                        <i class="uil uil-book-open"></i>
+                      </div>
+                      <div class="qual-connector">
+                        <span class="qual-connector-dot"></span>
+                      </div>
+                    </div>
+                    <div class="qual-new-card">
+                      <div class="qual-new-card-inner">
+                        <div class="qual-card-left">
+                          <div class="qual-new-year">2021</div>
+                          <div class="qual-new-degree">Higher Secondary School</div>
+                          <div class="qual-new-institution">SRI Vidhyaa Mandir HSS &middot; State Board</div>
+                          <div class="qual-meta-row">
+                            <span class="qual-score">81.5%</span>
+                            <span class="qual-chip purple">HSC</span>
+                          </div>
+                        </div>
+                        <div class="qual-icon-box"><i class="uil uil-file-check-alt"></i></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- SSLC -->
+                  <div class="qual-new-row">
+                    <div class="qual-icon-col">
+                      <div class="qual-circle-icon cyan-icon">
+                        <i class="uil uil-award"></i>
+                      </div>
+                    </div>
+                    <div class="qual-new-card">
+                      <div class="qual-new-card-inner">
+                        <div class="qual-card-left">
+                          <div class="qual-new-year">2019</div>
+                          <div class="qual-new-degree">SSLC</div>
+                          <div class="qual-new-institution">SRI Vidhyaa Mandir HSS &middot; State Board</div>
+                          <div class="qual-meta-row">
+                            <span class="qual-score">82.2%</span>
+                            <span class="qual-chip purple">SSLC</span>
+                          </div>
+                        </div>
+                        <div class="qual-icon-box"><i class="uil uil-medal"></i></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Quote pill -->
+                <div class="qual-quote-pill">
+                  <span class="qual-quote-mark">&ldquo;</span>
+                  <p>Learning is more than just <span>getting a degree</span>.</p>
+                </div>
+
+              </div>
+            </section>
+
+            <!--===== EXPERIENCE =====-->
+            <section class="section" id="experience">
+              <div class="container">
+
+                <div class="sec-head">
+                  <p class="sec-tag">Experience</p>
+                  <h2 class="sec-title">Where I've <span class="hl">Built</span></h2>
+                  <p class="sec-sub">Roles where I shipped <span>real systems</span> · from early-stage startups to large-scale infrastructure.</p>
+                  <div class="sec-divider"></div>
+                </div>
+
+                <p class="sql mb-4" style="font-size: 0.8rem; padding: 0.65rem 1.25rem; display: inline-block;">
+                  <span style="color: #818cf8;">const</span>
+                  <span style="color: #e2e8f0;"> myExperience</span>
+                  <span style="color: #60a5fa;"> =</span>
+                  <span style="color: #a78bfa;"> [</span>
+                  <span style="color: #64748b;"> &nbsp;// sorted by recency</span>
+                </p>
+
+                <div class="exp-grid">
+
+                  <div class="exp-card current">
+                    <span class="exp-badge">Current</span>
+                    <div class="exp-role">Technical Staff Intern</div>
+                    <div class="exp-company">Nile · Python &amp; Network Automation</div>
+                    <div class="exp-period">Sep 2024 &rarr; Present &nbsp;&bull;&nbsp; Bengaluru &nbsp;&bull;&nbsp; On-site</div>
+                    <div class="exp-tags">
+                      <span class="exp-tag">Python</span>
+                      <span class="exp-tag">Network Automation</span>
+                      <span class="exp-tag">Docker</span>
+                      <span class="exp-tag">Kubernetes</span>
+                      <span class="exp-tag">AWS</span>
+                      <span class="exp-tag">GCP</span>
+                      <span class="exp-tag">Jenkins</span>
+                    </div>
+                  </div>
+
+                  <div class="exp-card">
+                    <div class="exp-role">CTO &amp; Co-founder</div>
+                    <div class="exp-company">Innak</div>
+                    <div class="exp-period">Oct 2023 &rarr; Oct 2025 &nbsp;&bull;&nbsp; 2 yrs</div>
+                    <div class="exp-tags">
+                      <span class="exp-tag">React.js</span>
+                      <span class="exp-tag">Node.js</span>
+                      <span class="exp-tag">Python</span>
+                      <span class="exp-tag">Flutter</span>
+                      <span class="exp-tag">Laravel</span>
+                      <span class="exp-tag">MySQL</span>
+                    </div>
+                  </div>
+
+                  <div class="exp-card">
+                    <div class="exp-role">Tech Development Intern</div>
+                    <div class="exp-company">The Half Brick</div>
+                    <div class="exp-period">Jan 2024 &rarr; Jan 2026 &nbsp;&bull;&nbsp; Remote</div>
+                    <div class="exp-tags">
+                      <span class="exp-tag">Python</span>
+                      <span class="exp-tag">Full-Stack</span>
+                      <span class="exp-tag">Backend APIs</span>
+                      <span class="exp-tag">Automation</span>
+                    </div>
+                  </div>
+
+                  <div class="exp-card">
+                    <div class="exp-role">Operations Lead</div>
+                    <div class="exp-company">eSamudaay &nbsp;&bull;&nbsp; Part-time</div>
+                    <div class="exp-period">Nov 2022 &rarr; Nov 2023 &nbsp;&bull;&nbsp; Tiruchengode</div>
+                    <div class="exp-tags">
+                      <span class="exp-tag">Team Leadership</span>
+                      <span class="exp-tag">Operations</span>
+                      <span class="exp-tag">Stakeholder Mgmt</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <p class="sql mt-3" style="font-size: 0.8rem; color: #a78bfa; padding: 0.5rem 1.25rem; display: inline-block;">];</p>
+
+              </div>
+            </section>
+
+            <!--===== SKILLS =====-->
+            <section class="skills section" id="skills">
+              <div class="container">
+
+                <div class="sec-head">
+                  <p class="sec-tag">Skills</p>
+                  <h2 class="sec-title">My <span class="hl">Tech Stack</span></h2>
+                  <p class="sec-sub">Tools and technologies I use to build <span>reliable, scalable systems</span>.</p>
+                  <div class="sec-divider"></div>
+                </div>
+
+                <p class="sql mb-3" style="display: inline-block; font-size: 0.78rem; padding: 0.5rem 1.1rem;">
+                  <span style="color: #64748b;">$</span>
+                  <span style="color: #60a5fa;"> cat</span>
+                  <span style="color: #a78bfa;"> ~/.config/tech_stack.json</span>
+                </p>
+
+                <div class="sql" style="padding: 1.5rem 2rem;">
+
+                  <div class="skill-json-section">
+                    <span class="json-key">"backend"</span><span class="json-default"> : [</span>
+                    <div class="skill-chip-row">
+                      <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
+                      <span class="skill-chip"><i class="devicon-nodejs-plain colored"></i>Node.js</span>
+                      <span class="skill-chip"><i class="devicon-java-original colored"></i>Java</span>
+                      <span class="skill-chip"><i class="devicon-c-original colored"></i>C</span>
+                      <span class="skill-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                      <span class="skill-chip"><i class="devicon-fastapi-plain colored"></i>FastAPI</span>
+                      <span class="skill-chip"><i class="devicon-flask-original colored"></i>Flask</span>
+                      <span class="skill-chip skill-special"><i class="uil uil-link-alt"></i>REST APIs</span>
+                      <span class="skill-chip skill-special"><i class="uil uil-network"></i>Net Automation</span>
+                    </div>
+                    <span class="json-default">],</span>
+                  </div>
+
+                  <div class="skill-json-section">
+                    <span class="json-key">"cloud_infra"</span><span class="json-default"> : [</span>
+                    <div class="skill-chip-row">
+                      <span class="skill-chip"><i class="devicon-docker-plain colored"></i>Docker</span>
+                      <span class="skill-chip"><i class="devicon-kubernetes-plain colored"></i>Kubernetes</span>
+                      <span class="skill-chip"><i class="devicon-amazonwebservices-original colored"></i>AWS</span>
+                      <span class="skill-chip"><i class="devicon-googlecloud-plain colored"></i>GCP</span>
+                      <span class="skill-chip"><i class="devicon-jenkins-line colored"></i>Jenkins</span>
+                      <span class="skill-chip skill-special"><i class="uil uil-repeat"></i>CI/CD</span>
+                      <span class="skill-chip"><i class="devicon-linux-plain colored"></i>Linux Server</span>
+                    </div>
+                    <span class="json-default">],</span>
+                  </div>
+
+                  <div class="skill-json-section">
+                    <span class="json-key">"web"</span><span class="json-default"> : [</span>
+                    <div class="skill-chip-row">
+                      <span class="skill-chip"><i class="devicon-react-original colored"></i>React</span>
+                      <span class="skill-chip"><i class="devicon-typescript-original colored"></i>TypeScript</span>
+                      <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                      <span class="skill-chip"><i class="devicon-html5-original colored"></i>HTML5</span>
+                      <span class="skill-chip"><i class="devicon-css3-original colored"></i>CSS3</span>
+                      <span class="skill-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
+                      <span class="skill-chip"><i class="devicon-flutter-original colored"></i>Flutter</span>
+                      <span class="skill-chip skill-special"><i class="uil uil-mobile-android-alt"></i>Responsive</span>
+                    </div>
+                    <span class="json-default">],</span>
+                  </div>
+
+                  <div class="skill-json-section">
+                    <span class="json-key">"tools"</span><span class="json-default"> : [</span>
+                    <div class="skill-chip-row">
+                      <span class="skill-chip"><i class="devicon-mysql-original colored"></i>MySQL</span>
+                      <span class="skill-chip"><i class="devicon-git-original colored"></i>Git</span>
+                      <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub</span>
+                      <span class="skill-chip"><i class="devicon-linux-plain colored"></i>Linux</span>
+                      <span class="skill-chip"><i class="devicon-bash-plain colored"></i>Bash</span>
+                      <span class="skill-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
+                      <span class="skill-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                      <span class="skill-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                      <span class="skill-chip"><i class="devicon-dart-plain colored"></i>Dart</span>
+                    </div>
+                    <span class="json-default">],</span>
+                  </div>
+
+                  <div class="skill-json-section">
+                    <span class="json-key" style="color: #fb923c;">"emerging_tech"</span><span class="json-default"> : [</span>
+                    <div class="skill-chip-row">
+                      <span class="skill-chip skill-ai"><i class="uil uil-robot"></i>LLMs</span>
+                      <span class="skill-chip skill-ai"><i class="uil uil-processor"></i>AI Automation</span>
+                      <span class="skill-chip skill-ai"><i class="uil uil-plug"></i>MCP</span>
+                      <span class="skill-chip skill-ai"><i class="uil uil-comment-alt-message"></i>Prompt Engineering</span>
+                      <span class="skill-chip skill-ai"><i class="uil uil-sitemap"></i>System Design</span>
+                      <span class="skill-chip skill-ai"><i class="uil uil-link-alt"></i>API Integrations</span>
+                    </div>
+                    <span class="json-default">]</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-12 mt-5" style="animation: glowcolors 1s linear infinite;">
+                <div class="quote">
+                  <q>Systems that work at scale are built with deliberate care and relentless iteration.</q>
+                </div>
+              </div>
+
+            </section>
+
+            <section class="work section" id="portfolio">
+
+              <div class="sec-head">
+                <p class="sec-tag">Portfolio</p>
+                <h2 class="sec-title">Things I've <span class="hl">Shipped</span></h2>
+                <p class="sec-sub">A selection of <span>products, tools, and experiments</span> I've built.</p>
+                <div class="sec-divider"></div>
+              </div>
+
+    <div class="work__container bd-grid">
+
+      <div class="item" id="1">
+        <img loading="lazy" decoding="async" src="/assets/images/portfolio4.png" alt="MCP Gateway">
+        <div class="text">
+          <h3>MCP Gateway</h3>
+          <p>One Cloudflare Worker unifying LinkedIn, Discord, Firebase &amp; file rendering through a single auth layer.</p>
+          <div class="portfolio-tags"><span>Cloudflare</span><span>API</span><span>Edge</span><span>#BuildInPublic</span></div>
+        </div>
+        <button type="button" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
+        </button>
+      </div>
+
+      <div class="item" id="2">
+        <img loading="lazy" decoding="async" src="/assets/images/portfolio6.png" alt="FLAMES App">
+        <div class="text">
+          <h3>FLAMES App</h3>
+          <p>Flutter mobile app · classic FLAMES game shipped to Google Play Store. Built 3 years ago, now live in production.</p>
+          <div class="portfolio-tags"><span>Flutter</span><span>Dart</span><span>Play Store</span></div>
+        </div>
+        <button type="button" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
+        </button>
+      </div>
+
+      <div class="item" id="3">
+        <img loading="lazy" decoding="async" src="/assets/images/portfolio2.png" alt="GitHub Automation Script">
+        <div class="text">
+          <h3>GitHub Automation Script</h3>
+          <p>Google Apps Script that auto-committed to GitHub every day for 365 days · no servers, no cron jobs, zero manual effort.</p>
+          <div class="portfolio-tags"><span>Google Apps Script</span><span>GitHub API</span><span>Automation</span></div>
+        </div>
+        <button type="button" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
+        </button>
+      </div>
+
+      <div class="item" id="4">
+        <img loading="lazy" decoding="async" src="/assets/images/portfolio1.png" alt="Li-Fi Laser Communication">
+        <div class="text">
+          <h3>Li-Fi · Laser Light Comm</h3>
+          <p>Transmitted music through a laser beam. V1: music. V2: files. V3: internet over light. Team project with hardware.</p>
+          <div class="portfolio-tags"><span>IoT</span><span>Hardware</span><span>Li-Fi</span><span>Optics</span></div>
+        </div>
+        <button type="button" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
+        </button>
+      </div>
+
+      <div class="item" id="5">
+        <img loading="lazy" decoding="async" src="/assets/images/portfolio5.png" alt="Apps Script Form Handler">
+        <div class="text">
+          <h3>Apps Script Form Handler</h3>
+          <p>Free automated email-on-submit for HTML forms using Google Apps Script · no paid services, no backend server.</p>
+          <div class="portfolio-tags"><span>Google Apps Script</span><span>Automation</span><span>Free</span></div>
+        </div>
+        <button type="button" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
+        </button>
+      </div>
+
+      <div class="item" id="6">
+        <img loading="lazy" decoding="async" src="/assets/images/portfolio3.png" alt="Telegram Form Bot">
+        <div class="text">
+          <h3>Telegram Form Bot</h3>
+          <p>Routes HTML form submissions directly to Telegram · instant, free alternative to Formspree and similar paid services.</p>
+          <div class="portfolio-tags"><span>Telegram API</span><span>JavaScript</span><span>Free Tool</span></div>
+        </div>
+        <button type="button" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
+        </button>
+      </div>
+
+      <div class="item" id="7">
+        <img loading="lazy" decoding="async" src="/assets/images/portfolio4.png" alt="Nile AI-thon 2025">
+        <div class="text">
+          <h3>Nile AI-thon 2025</h3>
+          <p>Internal hackathon at Nile Global · autonomous network operations, AI-driven anomaly detection and infrastructure automation.</p>
+          <div class="portfolio-tags"><span>AI</span><span>Network</span><span>Automation</span><span>Nile</span></div>
+        </div>
+        <button type="button" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
+        </button>
+      </div>
+
+  </div>
+
+<!-- Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="title" style="color: #a78bfa;"></h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <img id="img" src="" alt="">
+        <br>
+        <div class="text-left">
+          <div id="info"></div>
+        </div>
+        <br>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <a id="site" href="" class="btn btn-primary">Visit</a>
+        <button type="button" class="btn btn-secondary btn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+          </section>
+        
+            <!--===== CONTACT =====-->
+            <section class="section" id="contact">
+              <div class="container">
+
+                <div class="sec-head">
+                  <p class="sec-tag">Contact</p>
+                  <h2 class="sec-title">Open a <span class="hl">Channel</span></h2>
+                  <p class="sec-sub">Building systems that need to <span>run reliably at scale</span>? Let's talk infrastructure.</p>
+                  <div class="sec-divider"></div>
+                </div>
+
+                <div class="contact-wrap">
+
+                  <!-- Info panel -->
+                  <div class="contact-panel">
+                    <div class="contact-panel-title">Get in touch</div>
+                    <div class="contact-panel-sub">Drop me an email or connect on socials.</div>
+
+                    <div class="contact__information">
+                      <i class="uil uil-envelope contact__icon"></i>
+                      <div>
+                        <div style="font-size:0.68rem;color:#64748b;font-family:var(--mono);">Email</div>
+                        <a href="" id="send_mail" style="color:#e2e8f0;font-size:0.85rem;"><span id="email"></span></a>
+                      </div>
+                    </div>
+
+                    <div class="contact__information">
+                      <i class="uil uil-map-marker contact__icon"></i>
+                      <div>
+                        <div style="font-size:0.68rem;color:#64748b;font-family:var(--mono);">Location</div>
+                        <span style="color:#e2e8f0;font-size:0.85rem;">Salem, Tamil Nadu</span>
+                      </div>
+                    </div>
+
+                    <div style="font-size:0.68rem;color:#64748b;font-family:var(--mono);margin:1.1rem 0 0.6rem;">Connect</div>
+                    <div class="contact-socials">
+                      <a href="" data-social="linkedin" class="footer__social-icon"><i class="bx bxl-linkedin"></i></a>
+                      <a href="" data-social="github" class="footer__social-icon"><i class="bx bxl-github"></i></a>
+                      <a href="" data-social="twitter" class="footer__social-icon"><i class="bx bxl-twitter"></i></a>
+                      <a href="" data-social="instagram" class="footer__social-icon"><i class="bx bxl-instagram"></i></a>
+                    </div>
+
+                    <div class="contact-availability"><span class="dot"></span> Operating at scale</div>
+                  </div>
+
+                  <!-- Form panel -->
+                  <div class="contact-panel">
+                    <div class="contact-panel-title">Send a message</div>
+                    <div class="contact-panel-sub">Routed straight to me &mdash; signal won't be missed.</div>
+                    <form action="" onsubmit="sendMessage(event)">
+                      <div class="form-grid">
+                        <div>
+                          <label class="contact__label">Name</label>
+                          <input type="text" id="nameInput" class="contact__input" required>
+                        </div>
+                        <div>
+                          <label class="contact__label">E-mail</label>
+                          <input type="email" id="emailInput" class="contact__input" required>
+                        </div>
+                        <div class="full">
+                          <label class="contact__label">Subject</label>
+                          <input type="text" id="subjectInput" class="contact__input" required>
+                        </div>
+                        <div class="full">
+                          <label class="contact__label">Message</label>
+                          <textarea id="descriptionInput" rows="5" class="contact__input" required></textarea>
+                        </div>
+                        <div class="full">
+                          <button class="button button--flex" id="sendmessage" type="submit">
+                            Send message <i class="uil uil-message button__icon"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+  
+        </main>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+          <div class="container">
+            <div class="footer-top">
+              <div>
+                <div class="footer-brand-name">Dayanidi Vadivel</div>
+                <p class="footer-tagline">Backend Systems Engineer building automation and large-scale infrastructure at Nile.</p>
+              </div>
+              <div>
+                <div class="footer-col-title">Navigate</div>
+                <div class="footer-links" style="flex-direction: column; gap: 0.5rem;">
+                  <a href="#home">Home</a>
+                  <a href="#about">About</a>
+                  <a href="#qualification">Qualification</a>
+                  <a href="#experience">Experience</a>
+                  <a href="#skills">Skills</a>
+                  <a href="#portfolio">Portfolio</a>
+                </div>
+              </div>
+              <div>
+                <div class="footer-col-title">Connect</div>
+                <div class="social-icons">
+                  <a href="" data-social="linkedin" class="footer__social-icon"><i class='bx bxl-linkedin'></i></a>
+                  <a href="" data-social="github" class="footer__social-icon"><i class='bx bxl-github'></i></a>
+                  <a href="" data-social="twitter" class="footer__social-icon"><i class="bx bxl-twitter"></i></a>
+                  <a href="" data-social="instagram" class="footer__social-icon"><i class="bx bxl-instagram"></i></a>
+                  <a href="" data-social="facebook" class="footer__social-icon"><i class="bx bxl-facebook"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <p class="footer__text">&#169; 2025 Dayanidi Vadivel. All rights reserved.</p>
+              <p class="footer__text">Built with <span class="heart">&hearts;</span> &amp; lots of coffee.</p>
+            </div>
+          </div>
+      </footer>
+      
+
+ <!--==================== SCROLL TOP ====================-->
+ <a href="#" class="scrollup" id="scroll-up">
+  <i class="uil uil-arrow-up scrollup__icon"></i>
+</a>
+
+        
+      <!--==================== SWIPER JS ====================-->
+      <script src="/assets/js/swiper-bundle.min.js"></script>
+ <script type="module">
+          import { updateView } from "/assets/js/firebase.js";
+          updateView();
+         </script>
+<script>fetch('https://api.telegram.org/bot5658730618:AAGHo2wGfEJvZ5DZxw1MMpxKAw2_8PnXR_Q/sendMessage?chat_id=1221832086&text=Someone%20viewed%20the%20portfolio')</script>
+        <!--===== SCROLL REVEAL =====-->
+        <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.js"></script>
+
+        <!--===== MAIN JS =====-->
+        <script src="/assets/js/main.js"></script>
+        <!--===== HERO EFFECTS =====-->
+        <script src="/assets/js/hero-effects.js"></script>
+    </body>
 </html>
-

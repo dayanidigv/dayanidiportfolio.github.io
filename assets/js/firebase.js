@@ -67,6 +67,20 @@ const updateNormalView = async () => {
     }
   };
   
+// Single-view portfolio counter: one site, one view — just bump total.
+const updateView = async () => {
+  const documentRef = doc(db, "Portfolio", "B6MRUpOfbx86FX9cGDmB");
+  try {
+    const snap = await getDoc(documentRef);
+    if (snap.exists()) {
+      await updateDoc(documentRef, { totalviews: snap.data().totalviews + 1 });
+      console.log("View counted");
+    }
+  } catch (error) {
+    console.error("Error updating view count:", error);
+  }
+};
+
 // Export Firebase modules
 export {
   db,
@@ -77,5 +91,6 @@ export {
   getDoc,
   updateDoc,
   updateNormalView,
-  updateCoderView
+  updateCoderView,
+  updateView
 };

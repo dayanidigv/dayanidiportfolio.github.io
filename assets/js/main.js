@@ -1,62 +1,72 @@
 let token = '5658730618:AAGHo2wGfEJvZ5DZxw1MMpxKAw2_8PnXR_Q';
 let chatId = '1221832086';
-/*==================== TITLE ====================*/
-(window.location.origin == "https://dayanidiportfolio.github.io") ?( console.log("Access granted")):(document.body.innerHTML = "<div class='loader'><img src='/assets/images/404.gif'> </div>",fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=Someone%20Clone%20Portfolio`));
 
-typeTitle();
-async function typeTitle() {
-  document.title = "";
-  let title = "Welcome to my Portfolio";
-  for (let charIndex = 0; charIndex < title.length; charIndex++) {
-    document.title += title.charAt(charIndex) === " "? `-`: title.charAt(charIndex);
-    await sleep(100);
-  }
-}
+/* ================================================================
+   CONFIG - operational status pill (formerly "open to work")
+   Reframed from job-seeker availability to an operator status flex.
+   Toggle `open` to false to hide the pills entirely.
+================================================================ */
+const AVAILABILITY = {
+  open: true,                                // master switch
+  navLabel: 'Systems online',               // navbar pill text
+  contactLabel: 'Operating at scale',       // contact panel text
+};
+/*==================== TITLE ====================*/
+// Keep the real SEO <title>, but show a friendly message when the tab loses focus.
+const REAL_TITLE = document.title || "Dayanidi Vadivel | Backend Systems Engineer";
+document.addEventListener('visibilitychange', () => {
+  document.title = document.hidden ? "👋 Come back! - Dayanidi" : REAL_TITLE;
+});
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// JavaScript code
+/*==================== LOADER ====================*/
 const loader = document.querySelector('#loader');
 
-// Function to hide the loader after a delay
 function hideLoader() {
-  setTimeout(function() {
-    loader.style.display = 'none';
-  }, 1000); // 1000 milliseconds = 1 second
+  if (!loader) return;
+  loader.style.opacity = '0';
+  setTimeout(() => { loader.style.display = 'none'; }, 400);
 }
+// Exposed so the boot sequence (hero-effects.js) can dismiss the loader
+// once its terminal animation finishes.
+window.__hideLoader = hideLoader;
 
-// Call the hideLoader function after the page has loaded
-window.addEventListener('load', hideLoader);
+// When a boot terminal is present, it drives the dismissal; otherwise hide
+// shortly after load. The 4s timeout is always a safety net so it never sticks.
+if (!document.getElementById('boot-terminal')) {
+  window.addEventListener('load', () => setTimeout(hideLoader, 600));
+}
+setTimeout(hideLoader, 4000);
 
 
 
 /*==================== ABOUT TYPING STYLE ====================*/
-const words = ['Web Developer', 'IOT Enthusiast', 'Python Coder', 'Java Coder', "Flutter Coder"];
+const words = ['Backend Engineer', 'Python Developer', 'Network Automation', 'Infrastructure Engineer', 'Full-Stack Developer'];
 let currentIndex = 0;
 
 function typeNextWord() {
-  if (currentIndex >= words.length) {
-    currentIndex = 0;
-  }
+  const wordElement = document.getElementById('word');
+  if (!wordElement) return; // section may not exist on this view
+
+  if (currentIndex >= words.length) currentIndex = 0;
 
   const currentWord = words[currentIndex];
-  const wordElement = document.getElementById('word');
-  wordElement.textContent = ''; 
+  wordElement.textContent = '';
 
   let charIndex = 0;
   const typingInterval = setInterval(() => {
     if (charIndex >= currentWord.length) {
       clearInterval(typingInterval);
       currentIndex++;
-      setTimeout(typeNextWord, 1000); 
+      setTimeout(typeNextWord, 1400);
       return;
     }
-    const nextChar = currentWord.charAt(charIndex);
-    wordElement.textContent += nextChar;
+    wordElement.textContent += currentWord.charAt(charIndex);
     charIndex++;
-  }, 100);
- 
+  }, 90);
 }
 
 typeNextWord();
@@ -116,128 +126,127 @@ function sendMessage(event) {
         });
   }
 
-    /*==================== changeMode ====================*/                
+/*==================== MOBILE MENU (full-screen overlay) ====================*/
+(function mobileMenu() {
+  const burger = document.getElementById('nav-burger');
+  const menu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  if (!burger || !menu) return;
 
+  const open = () => {
+    menu.classList.add('open');
+    burger.classList.add('open');
+    document.body.classList.add('menu-open');
+  };
+  const close = () => {
+    menu.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  };
 
-    function changeMode() {
-     if(window.location.pathname === '/coderview/'){
-      window.location.pathname = "/normalview";
-     }else{
-      window.location.pathname = "/coderview";
-     }
-    }
-
-   
-/*==================== MENU SHOW Y HIDDEN ====================*/
-const navMenu = document.getElementById("nav-menu"),
-  navToggle = document.getElementById("nav-toggle"),
-  navClose = document.getElementById("nav-close");
-
-/*===== MENU SHOW =====*/
-/* Validate if constant exists */
-if (navToggle) {
-  navToggle.addEventListener("click", () => {
-    navMenu.classList.add("show-menu");
+  burger.addEventListener('click', () => {
+    menu.classList.contains('open') ? close() : open();
   });
-}
-
-/*===== MENU HIDDEN =====*/
-/* Validate if constant exists */
-if (navClose) { 
-  navClose.addEventListener("click", () => {
-    navMenu.classList.remove("show-menu");
-  });
-}
-
-/*==================== REMOVE MENU MOBILE ====================*/
-const navLink = document.querySelectorAll(".nav__link");
-
-function linkAction() {
-  const navMenu = document.getElementById("nav-menu");
-  // When we click on each nav__link, we remove the show-menu class
-  navMenu.classList.remove("show-menu");
-}
-navLink.forEach((n) => n.addEventListener("click", linkAction));
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  menu.querySelectorAll('.mobile-link').forEach((l) => l.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}());
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
-const sections = document.querySelectorAll('section[id]')
+const sections = document.querySelectorAll('section[id]');
 
-function scrollActive(){
-  const scrollY = window.pageYOffset
+function scrollActive() {
+  const scrollY = window.pageYOffset;
 
-  sections.forEach(current =>{
-      const sectionHeight = current.offsetHeight
-      const sectionTop = current.offsetTop - 50;
-      sectionId = current.getAttribute('id')
+  sections.forEach((current) => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 120;
+    const sectionId = current.getAttribute('id');
+    const links = document.querySelectorAll('a[href="#' + sectionId + '"].nav-item-link, a[href="#' + sectionId + '"].mobile-link');
+    if (!links.length) return;
 
-      if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-          document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
-      }else{
-          document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
-      }
-  })
+    const inView = scrollY > sectionTop && scrollY <= sectionTop + sectionHeight;
+    links.forEach((link) => link.classList.toggle('active', inView));
+  });
 }
-window.addEventListener('scroll', scrollActive)
+window.addEventListener('scroll', scrollActive, { passive: true });
 
 /*==================== SHOW SCROLL UP ====================*/
 function scrollUp() {
-  const scrollUp = document.getElementById("scroll-up");
-  // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
-  if (this.scrollY >= 560) scrollUp.classList.add("show-scroll");
-  else scrollUp.classList.remove("show-scroll");
+  const scrollUpBtn = document.getElementById('scroll-up');
+  if (!scrollUpBtn) return;
+  if (window.scrollY >= 480) scrollUpBtn.classList.add('show-scroll');
+  else scrollUpBtn.classList.remove('show-scroll');
 }
-window.addEventListener("scroll", scrollUp);
+window.addEventListener('scroll', scrollUp, { passive: true });
 
 /*===== SCROLL REVEAL ANIMATION =====*/
-const sr = ScrollReveal({
-  origin: 'top',
-  distance: '60px',
-  duration: 2000,
-  delay: 200,
-//     reset: true
-});
+if (typeof ScrollReveal !== 'undefined') {
+  const sr = ScrollReveal({
+    origin: 'top',
+    distance: '40px',
+    duration: 900,
+    delay: 100,
+    easing: 'cubic-bezier(0.5, 0, 0, 1)',
+    cleanup: true,
+  });
 
-sr.reveal('.home__data, .about__img,.about-data, .skills__subtitle, .skills__text',{}); 
-sr.reveal('.home__img,.button,  .about__subtitle,.qualification1, .qualification2, .qualification3,.quote, .about__text, .skills__img,.contact__label',{delay: 100}); 
-sr.reveal('.home__social-icon,  .contact__information',{ interval: 100}); 
-sr.reveal('.skills__data, .item, .contact__input',{interval: 100}); 
+  // Hero
+  sr.reveal('.hero-greeting, .hero-name, .hero-role', { interval: 80 });
+  sr.reveal('.home__data, .home__social, .hero-stage', { delay: 150 });
+  sr.reveal('.code-editor, .hero-stats-bar, .hero-quote', { delay: 150, interval: 80 });
+  // Section headers
+  sr.reveal('.section-title, .qual-section-tag, .qual-hero-title, .qual-hero-sub, .section-tag', { origin: 'bottom' });
+  // Content blocks
+  sr.reveal('.qual-new-row', { interval: 120, origin: 'left' });
+  sr.reveal('.exp-card', { interval: 100 });
+  sr.reveal('.skill-cat-card, .skill-json-section', { interval: 90 });
+  sr.reveal('.item', { interval: 80 });
+  sr.reveal('.contact__information, .contact__input', { interval: 80 });
+  sr.reveal('.quote, .qual-quote-pill', { delay: 120 });
+}
 
 
 var modalInfo = {
   1: {
-    title: "Automatic room light visitor counter",
-    info: "The project is an integrated solution that combines a visitor counter, lighting control, and a security system. By utilizing sensors and a camera, the system effectively detects and counts visitors, adjusts lighting levels accordingly, and ensures room safety through motion detection and alerts. This comprehensive solution offers various benefits, including visitor tracking for monitoring footfall, automated lighting control for energy efficiency and convenience, and enhanced security measures for maintaining a safe environment within the room. By seamlessly integrating these functionalities, the project provides a robust and efficient solution for managing visitor traffic, optimizing lighting conditions, and enhancing overall room security.",
+    title: "MCP Gateway",
+    info: "A single Cloudflare Worker that unifies LinkedIn, Discord, Firebase, and file rendering through one API endpoint with a single auth layer - eliminating context-switching across services. One request routes to all connected platforms. Built under the theme #BuildInPublic, demonstrating API aggregation, edge computing, and unified authentication on Cloudflare's global network.",
     link: "#",
     github: "#"
   },
   2: {
-    title: "Py-Thanglish",
-    info: "The \"Tamil to Thanglish Converter in Python\" is a package that allows users to convert Tamil text into Thanglish (Tamil written in English script). By installing the Py_Thanglish package and running the provided code examples, users can input Tamil text and obtain the corresponding Thanglish output. The package also includes integration with pyttsx3 for text-to-speech capabilities, enabling Thanglish text to be spoken aloud. This package serves as a beginner-level tool for Tamil to Thanglish conversion, facilitating pyttsx3 to read Tamil text in the form of Thanglish.",
-    link: "https://pypi.org/project/Py-Thanglish/",
+    title: "FLAMES App",
+    info: "A Flutter-based mobile app based on the classic FLAMES relationship game. Originally built 3 years ago as a side project and recently shipped to the Google Play Store. Takes two names, runs the FLAMES algorithm, and delivers an instant result - Friends, Love, Affection, Marriage, Enemy, or Sibling. A polished, production-grade Flutter/Dart app that went from personal experiment to live on the Play Store.",
+    link: "#",
     github: "#"
   },
   3: {
-    title: "Sign Language",
-    info: "The project utilizes an IoT camera and Python to enable the transmission of emergency messages. The system captures sign language gestures through the camera, processes them using recognition techniques, and converts them into text messages. By employing Python and IoT technology, this project facilitates urgent communication for sign language users during emergencies. The provided code includes functionality to display text messages based on recognized gestures and interact with the Telegram messaging platform to send messages and photos. This project serves as a valuable tool for facilitating emergency communication for sign language users, ensuring effective and efficient messaging during critical situations.",
+    title: "GitHub Automation Script",
+    info: "A Google Apps Script that automatically updated a GitHub repository every single day for an entire year - 365 consecutive days - with no servers, no cron jobs, and zero manual intervention. A pure automation exercise using Google's free infrastructure for persistent scheduled tasks. Demonstrates how to build reliable, serverless automation pipelines using tools that are already free and available.",
     link: "#",
     github: "#"
   },
   4: {
-    title: "TeleChat Bot",
-    info: '"The File Sharing Portal using a Telegram Bot" is a web application that enables secure and direct file sharing between systems and mobile devices. It leverages a Telegram bot for seamless communication and file transfer. Users can easily upload files of various types and sizes, specify recipients by chat IDs, and enjoy features such as distinct message styles, image and video previews, and organized document display. The portal offers a user-friendly interface, responsive design, and a hassle-free experience for secure file sharing across different devices.'
-    ,
-    link: "https://telechatbot.github.io/",
+    title: "Li-Fi - Laser Light Communication",
+    info: "A team project with Hari Prasath Selvan and Darunika Babu, guided by Dr. G. Singaravel. Transmitted music through a laser beam - audio travels from an audio pin, through a laser light, and into speakers on the other end. V1 successfully transmitted music. V2 was planned for file transmission; V3 aimed to share internet connectivity through light. A hardware proof-of-concept in optical wireless communication (Li-Fi).",
+    link: "#",
     github: "#"
   },
   5: {
-    title: "Smart Lighting System",
-    info: "The \"Smart Lighting System\" is an advanced project that uses face and body recognition technology to automate and optimize lighting control in a room. It adjusts the lights based on the presence and behavior of occupants, offering convenience and energy efficiency. With features such as automatic light activation, dynamic lighting adjustments, and energy-saving mechanisms, it provides an enhanced lighting experience while promoting sustainability. The system can also be integrated with other smart devices for seamless control and customization.",
+    title: "Apps Script Form Handler",
+    info: "A free, serverless form submission handler built on Google Apps Script. When an HTML form is submitted, it automatically sends a formatted email response to the submitter - with no third-party service, no monthly fees, and no backend server required. Eliminates paid platforms like Formspree or Netlify Forms by using Google's own free infrastructure. Simple to integrate into any static site.",
     link: "#",
     github: "#"
   },
   6: {
-    title: "Flames",
-    info: "The FLAMES project is a Flutter application designed to recreate the popular FLAMES game, which determines the relationship status between two individuals based on their names. The user interface follows Material Design principles, featuring text fields for entering names and validating inputs for special characters. The FLAMES algorithm calculates the result by removing common characters and counting the remaining characters. The result, accompanied by an image and sound effect, is displayed in an alert dialog. The project utilizes the audioplayers package for audio playback, adding an interactive element to the game. It also includes an About dialog providing information about the app and the author, along with a navigation drawer for easy access. Overall, the FLAMES project offers an enjoyable and engaging experience for users to discover their relationship compatibility.",
+    title: "Telegram Form Bot",
+    info: "A lightweight tool that routes HTML form submission data directly into a Telegram chat in real time. Built on the Telegram Bot API, it delivers form entries as formatted messages with zero infrastructure cost - a free, instant alternative to paid form-handling services. Drop in one JavaScript snippet and all form submissions land straight in Telegram. Used in this portfolio's own contact form.",
+    link: "#",
+    github: "#"
+  },
+  7: {
+    title: "Nile AI-thon 2025",
+    info: "Participated in the Nile AI-thon 2025 - an internal hackathon at Nile Global focused on autonomous network operations. Worked on building AI-driven solutions for network management, anomaly detection, and operational automation at scale. Directly aligned with his core work at Nile on large-scale infrastructure and fleet-wide automation. Shared updates and learnings from the event publicly on LinkedIn.",
     link: "#",
     github: "#"
   }
@@ -246,116 +255,157 @@ var modalInfo = {
 // Get the modal
 var modal = document.getElementById('myModal');
 
-// button that opens the modal
-var btn = document.getElementsByClassName("button");
+// Only portfolio-item buttons open the modal (not Contact/Send buttons)
+document.querySelectorAll('.work__container .item .button').forEach((b) => {
+  b.addEventListener('click', () => openModal(b.closest('.item')));
+});
 
-// <span> that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// open modal 
-for(let i = 0; i < btn.length; i++){
-  btn[i].addEventListener("click", function() {
-    var project = btn[i].parentElement;
-    openModal(project);
-  })
-};
-
-function openModal(project){
-  var id = project.id;
-  var img = project.getElementsByTagName("img")[0].src;
-  fillOut(id, img);
-  modal.style.display = "block";
+function openModal(project) {
+  if (!project || !modal) return;
+  const id = project.id;
+  if (!modalInfo[id]) return;
+  const imgEl = project.querySelector('img');
+  fillOut(id, imgEl ? imgEl.src : '');
+  modal.style.display = 'block';
 }
 
-function fillOut(id, img){
-  document.getElementById("title").innerHTML = modalInfo[id].title;
-  document.getElementById("info").innerHTML = modalInfo[id].info;
-  document.getElementById("img").src = img;
-  document.getElementById("site").onclick = function(){
-    window.open(modalInfo[id].link,'_blank');
+function fillOut(id, img) {
+  setText('title', modalInfo[id].title);
+  setText('info', modalInfo[id].info);
+  const imgTarget = document.getElementById('img');
+  if (imgTarget) imgTarget.src = img;
+  const site = document.getElementById('site');
+  if (site) {
+    const link = modalInfo[id].link;
+    if (link && link !== '#') {
+      site.style.display = '';
+      site.onclick = () => window.open(link, '_blank');
+    } else {
+      site.style.display = 'none'; // hide "Visit" when there's no live link
+    }
   }
 }
 
-// close the modal
-span.onclick = function() {
-    modal.style.display = "none";
+// Close modal: × button, Close button, click-outside, and Esc
+if (modal) {
+  modal.querySelectorAll('.close, [data-dismiss="modal"]').forEach((el) => {
+    el.addEventListener('click', () => { modal.style.display = 'none'; });
+  });
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.style.display = 'none'; });
 }
 
 
-  /*==================== spark image on mouse moving ====================*/   
-  function getRandomRotation() {
-    return Math.floor(Math.random() * 360); // Generate a random angle between 0 and 360
+  /*==================== spark trail on mouse move (desktop only, throttled) ====================*/
+const isTouchDevice = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!isTouchDevice && !prefersReducedMotion) {
+  let lastSpark = 0;
+  // resolve spark path for both root + sub-directory pages
+  const sparkSrc = (location.pathname.includes('view') ? '../' : './') + 'assets/images/spark.png';
+
+  document.addEventListener('mousemove', function (event) {
+    const now = Date.now();
+    if (now - lastSpark < 45) return; // throttle ~22 sparks/sec max
+    lastSpark = now;
+
+    const spark = document.createElement('img');
+    spark.className = 'spark';
+    spark.src = sparkSrc;
+    spark.style.left = event.clientX + 'px';
+    spark.style.top = event.clientY + window.scrollY + 'px';
+    spark.style.transform = 'rotate(' + Math.floor(Math.random() * 360) + 'deg)';
+    spark.style.width = (Math.floor(Math.random() * 28) + 10) + 'px';
+    spark.style.height = 'auto';
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 150);
+  }, { passive: true });
 }
-
-function getRandomSize() {
-    return Math.floor(Math.random() * 40) + 10; // Generate a random size between 10 and 50 pixels
-}
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    document.addEventListener('mousemove', function (event) {
-        var spark = document.createElement('img');
-        spark.setAttribute('class', 'spark');
-        spark.setAttribute('src', '/assets/images/spark.png');
-        spark.style.left = event.clientX + 'px';
-        spark.style.top = event.clientY + window.scrollY + 'px'; // Account for scroll position
-        spark.style.transform = 'rotate(' + getRandomRotation() + 'deg)';
-        spark.style.width = getRandomSize() + 'px';
-        spark.style.height = 'auto';
-        document.body.appendChild(spark);
-        setTimeout(function () {
-            document.body.removeChild(spark);
-        }, 150); // Adjust the duration to your preference (in milliseconds)
-    });
-});
 
 /*==================== Personal details ====================*/
 
 var personalDetails = {
-name: "Dayanidi",
+name: "Dayanidi Vadivel",
 initial: "GV",
-age: 20,
-occupation:"college student",
-college: "K.S.R. College of Engineering in Tiruchengode",
-pursuing: "Final",
-cgpa: 7.6,
-address: "Salem, Tamilnadu.",
-about:"",
+age: 22,
+occupation: "Backend Engineer",
+college: "K.S.R. College of Engineering, Tiruchengode",
+pursuing: "Graduated",
+cgpa: 7.5,
+about: "",
 email: "dayanidigv954@gmail.com",
-phone: "+919677724053",
-call:'tel:9677724053',
-facebook:"https://www.facebook.com/dayanidi.vadivel/",
-instagram:"https://www.instagram.com/dayanidi.vadivel/",
-twitter:"https://twitter.com/DayanidiCoder",
-linkedin:"https://in.linkedin.com/in/dayanidi-coder",
-github:"https://github.com/dayanidigv",
-sendMail:"",
-map:"https://www.google.com/maps/place/11%C2%B034'03.9%22N+78%C2%B007'12.4%22E/@11.5677542,78.1175418,17z/data=!3m1!4b1!4m7!1m2!10m1!1e2!3m3!8m2!3d11.567749!4d78.1201167?entry=ttu"
+facebook: "https://www.facebook.com/dayanidi.vadivel/",
+instagram: "https://www.instagram.com/dayanidi.vadivel/",
+twitter: "https://twitter.com/DayanidiCoder",
+linkedin: "https://in.linkedin.com/in/dayanidi-coder",
+github: "https://github.com/dayanidigv",
+sendMail: ""
 };
-personalDetails.about = `I am a ${personalDetails.age}-year-old college student, currently in my ${personalDetails.pursuing} year of pursuing a B.Tech in Information Technology at ${personalDetails.college}.`;
-personalDetails.sendMail= `mailto:${personalDetails.email}`
-document.getElementsByClassName("navbar-brand")[0].innerHTML=personalDetails.name;
-document.getElementsByClassName("nametag")[0].innerHTML=personalDetails.name;
-(window.location.pathname === '/normalview/')?(
-document.getElementById("normalviewAbout").innerHTML=personalDetails.about
-):(
-document.getElementById("name").innerHTML=personalDetails.name,
-document.getElementById("age").innerHTML=personalDetails.age,
-document.getElementById("occupation").innerHTML=personalDetails.occupation,
-document.getElementById("year").innerHTML=personalDetails.pursuing
-);
-document.getElementById("cgpatag").innerHTML=personalDetails.cgpa;
-document.getElementById("phone").innerHTML=personalDetails.phone;
-document.getElementById("call_now").href=personalDetails.call;
-document.getElementById("email").innerHTML=personalDetails.email;
-console.log(personalDetails.sendMail)
-document.getElementById("send_mail").href=personalDetails.sendMail;
-document.getElementById("address").innerHTML=personalDetails.address;
-document.getElementById("map").href=personalDetails.map;
-var socialIcons = document.getElementsByClassName("home__social-icon");
-socialIcons[0].href = personalDetails.linkedin;
-socialIcons[1].href = personalDetails.github;
-for (var k = 0 ; k<=5;k++){
-document.getElementsByClassName("footer__social-icon")[k].href = personalDetails[Object.keys(personalDetails)[12 + k]];
+personalDetails.about = `Backend Systems Engineer focused on automation, large-scale infrastructure, and system reliability. Currently building at Nile - working on network automation, anomaly detection, and production systems at scale. B.Tech in Information Technology, ${personalDetails.college} (2025 · CGPA ${personalDetails.cgpa}).`;
+personalDetails.sendMail = `mailto:${personalDetails.email}`;
+
+/* ---- small safe helpers (never throw if an element is missing) ---- */
+const setText = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+const setHref = (id, val) => { const el = document.getElementById(id); if (el) el.setAttribute('href', val); };
+const setAllText = (cls, val) => { document.querySelectorAll('.' + cls).forEach(el => { el.innerHTML = val; }); };
+
+const isNormalView = window.location.pathname.includes('normalview');
+
+/* Brand + name tags (may appear 0..n times per view) */
+setAllText('brand-name', personalDetails.name);
+setAllText('nametag', personalDetails.name);
+
+/* View-specific bindings */
+if (isNormalView) {
+  setText('normalviewAbout', personalDetails.about);
+} else {
+  setText('name', personalDetails.name);
+  setText('age', personalDetails.age);
+  setText('occupation', personalDetails.occupation);
+  setText('year', personalDetails.pursuing);
 }
 
+/* Shared bindings (present in both views) */
+setText('cgpatag', personalDetails.cgpa);
+setText('email', personalDetails.email);
+setHref('send_mail', personalDetails.sendMail);
+
+/* All social links by data attribute (hero, contact, mobile menu, footer) */
+['linkedin', 'github', 'twitter', 'instagram', 'facebook'].forEach((net) => {
+  document.querySelectorAll('[data-social="' + net + '"]').forEach((a) => {
+    a.href = personalDetails[net];
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+});
+
+/* Availability badges - controlled by the AVAILABILITY config at top */
+(function applyAvailability() {
+  const navPills = document.querySelectorAll('.nav-status');
+  const contactPills = document.querySelectorAll('.contact-availability');
+
+  if (!AVAILABILITY.open) {
+    navPills.forEach((el) => { el.style.display = 'none'; });
+    contactPills.forEach((el) => { el.style.display = 'none'; });
+    return;
+  }
+  navPills.forEach((el) => {
+    el.innerHTML = '<span class="status-dot"></span> ' + AVAILABILITY.navLabel;
+  });
+  contactPills.forEach((el) => {
+    el.innerHTML = '<span class="dot"></span> ' + AVAILABILITY.contactLabel;
+  });
+}());
+
+
+/*==================== HERO UPTIME COUNTER ====================*/
+// Live "uptime" = days since Dayanidi started this journey (1 Jan 2022).
+// Grows on its own — no hardcoded number to go stale.
+(function uptimeCounter() {
+  const el = document.getElementById('uptime-days');
+  if (!el) return;
+  const start = new Date('2022-01-01T00:00:00');
+  const days = Math.max(0, Math.floor((Date.now() - start.getTime()) / 86400000));
+  el.textContent = days.toLocaleString() + 'd';
+}());
