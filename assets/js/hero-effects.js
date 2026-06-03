@@ -700,63 +700,6 @@
 }());
 
 
-/* ─── PROJECT INFRASTRUCTURE WORLDS ─────────────────────────────
-   Section 6: each project reads as a deployed, operational service —
-   a persistent status strip (live OPERATIONAL + svc:// id), a topology
-   grid that activates on hover, and a typed icon emblem replacing the
-   old (mismatched) screenshots so the visual matches the project. */
-(function projectWorlds() {
-  const items = document.querySelectorAll('.work__container .item');
-  if (!items.length) return;
-
-  // icon per card id (maps to the real project, not a stray screenshot)
-  const ICONS = {
-    1: 'uil uil-server-network',     // MCP Gateway
-    2: 'uil uil-mobile-android',     // FLAMES App
-    3: 'bx bxl-github',              // GitHub Automation
-    4: 'uil uil-lightbulb-alt',      // Li-Fi
-    5: 'uil uil-envelope-check',     // Apps Script Form Handler
-    6: 'bx bxl-telegram',            // Telegram Form Bot
-    7: 'uil uil-processor',          // Nile AI-thon
-  };
-
-  items.forEach((item) => {
-    if (item.querySelector('.pw-status')) return;
-    const h3 = item.querySelector('h3');
-    const name = h3 ? h3.textContent.trim() : 'service';
-    const id = name.toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 22);
-
-    // retire the mismatched cover image
-    const img = item.querySelector('img');
-    if (img) img.classList.add('pw-cover-hidden');
-
-    const grid = document.createElement('div');
-    grid.className = 'pw-grid';
-    grid.setAttribute('aria-hidden', 'true');
-
-    const status = document.createElement('div');
-    status.className = 'pw-status';
-    status.setAttribute('aria-hidden', 'true');
-    status.innerHTML =
-      '<span class="pw-live"><span class="pw-dot"></span>OPERATIONAL</span>' +
-      '<span class="pw-id">svc://' + id + '</span>';
-
-    const emblem = document.createElement('div');
-    emblem.className = 'pw-emblem';
-    emblem.setAttribute('aria-hidden', 'true');
-    emblem.innerHTML =
-      '<i class="' + (ICONS[item.id] || 'uil uil-apps') + '"></i>' +
-      '<span class="pw-emblem-name">' + name + '</span>';
-
-    item.insertBefore(grid, item.firstChild);
-    item.insertBefore(status, item.firstChild);
-    item.appendChild(emblem);
-  });
-}());
-
 
 /* ─── CONTACT ENDPOINT ──────────────────────────────────────────
    Section 7: end the journey on "connection established". A comms
@@ -849,9 +792,11 @@
   const layers = [
     { src: 'quantum-particle-swirl.webp',         top: '9%',  side: 'left:-8%',   w: 460, op: 0.20, speed:  0.42 },
     { src: 'packet-flow-trails.webp',             top: '24%', side: 'right:-10%', w: 500, op: 0.17, speed: -0.34 },
-    { src: 'holographic-energy-beam.webp',        top: '40%', side: 'left:-6%',   w: 420, op: 0.20, speed:  0.48 },
+    { src: 'packet-flow-trails.webp',             top: '24%', side: 'left:-10%', w: 500, op: 0.17, speed: -0.34 },
+    { src: 'service-mesh-visuals.webp',        top: '40%', side: 'left:-6%',   w: 420, op: 0.20, speed:  0.48 },
+    { src: 'ai-crystal-objects.webp',             top: '50%', side: 'left:20%',   w: 420, op: 0.20, speed:  0.48 },
     { src: 'backend-pipeline-visualization.webp', top: '57%', side: 'right:-8%',  w: 480, op: 0.16, speed: -0.40 },
-    { src: 'holographic-service-pillar.webp',     top: '72%', side: 'left:-4%',   w: 360, op: 0.18, speed:  0.30 },
+    { src: 'neural-node-clusters.webp',     top: '72%', side: 'left:-4%',   w: 360, op: 0.18, speed:  0.30 },
     { src: 'glowing-mechanical-device.webp',      top: '87%', side: 'right:-7%',  w: 420, op: 0.18, speed: -0.44 },
   ];
 

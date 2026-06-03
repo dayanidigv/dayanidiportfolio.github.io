@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Dayanidi Vadivel, backend engineer, network automation, Python, projects, archive, portfolio, systems engineer, Docker, Kubernetes, AWS, automation">
+        <meta name="description" content="Explore the full catalog of 33 projects shipped by Dayanidi Vadivel, spanning cloud infrastructure, network automation, IoT, apps, and web platforms.">
+        <meta name="author" content="Dayanidi Vadivel">
+        <meta name="robots" content="index, follow">
+        
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "nhdiytkdut");
+        </script>
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <!-- ===== DEVICONS ===== -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css"/>
+        <!-- ===== UNICONS ===== -->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+        <title>Projects Catalog | Dayanidi Vadivel</title>
+
+        <style>
+            /* Sticky simplified header */
+            .projects-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: var(--z-fixed);
+                background: rgba(7, 13, 31, 0.75);
+                backdrop-filter: var(--blur);
+                -webkit-backdrop-filter: var(--blur);
+                border-bottom: 1px solid var(--border);
+                transition: var(--transition);
+            }
+            .projects-nav-shell {
+                max-width: var(--container);
+                margin: 0 auto;
+                padding: 0 var(--gutter);
+                height: var(--header-height);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            /* Custom Search and Filters layout */
+            .projects-controls {
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+                margin-bottom: 3rem;
+                background: rgba(139, 92, 246, 0.02);
+                border: 1px solid var(--border);
+                padding: 1.5rem;
+                border-radius: var(--radius);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+                backdrop-filter: var(--blur);
+                -webkit-backdrop-filter: var(--blur);
+            }
+            .projects-search-bar {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            .projects-search-wrapper {
+                position: relative;
+                flex: 1;
+                min-width: 260px;
+            }
+            .projects-search-wrapper i {
+                position: absolute;
+                left: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--text-dim);
+                font-size: 1.1rem;
+                transition: var(--transition);
+            }
+            .projects-search-input {
+                width: 100%;
+                padding: 0.8rem 1rem 0.8rem 2.6rem;
+                background: rgba(7, 13, 31, 0.85);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-sm);
+                color: var(--text);
+                font-family: var(--sans);
+                font-size: 0.9rem;
+                outline: none;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .projects-search-input:focus {
+                border-color: var(--cyan);
+                box-shadow: var(--cyan-glow);
+            }
+            .projects-search-input:focus + i {
+                color: var(--cyan);
+            }
+            
+            .projects-sort-wrapper {
+                min-width: 180px;
+                position: relative;
+            }
+            .projects-sort-select {
+                width: 100%;
+                padding: 0.8rem 2.5rem 0.8rem 1rem;
+                background: rgba(7, 13, 31, 0.85);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-sm);
+                color: var(--text);
+                font-family: var(--sans);
+                font-size: 0.9rem;
+                outline: none;
+                cursor: pointer;
+                appearance: none;
+                -webkit-appearance: none;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 1rem center;
+                background-size: 1rem;
+                transition: all 0.3s ease;
+            }
+            .projects-sort-select:focus {
+                border-color: var(--purple-lt);
+                box-shadow: var(--purple-glow);
+            }
+            
+            .projects-meta-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding-top: 0.25rem;
+                font-family: var(--mono);
+                font-size: 0.75rem;
+                color: var(--text-dim);
+                border-top: 1px dashed rgba(139, 92, 246, 0.1);
+            }
+            .projects-count-label span {
+                color: var(--cyan);
+                font-weight: 600;
+            }
+            
+            /* Navbar Button styling */
+            .nav-back-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                background: rgba(139, 92, 246, 0.08);
+                border: 1px solid var(--border);
+                padding: 0.45rem 1rem;
+                border-radius: var(--radius-sm);
+                color: var(--text);
+                font-size: 0.85rem;
+                transition: var(--transition);
+                font-family: var(--sans);
+                font-weight: 500;
+            }
+            .nav-back-btn:hover {
+                background: var(--purple-dim);
+                border-color: var(--purple-lt);
+                color: var(--cyan);
+                box-shadow: var(--purple-glow);
+                text-decoration: none;
+            }
+            
+            /* Override scroll margin on cards page */
+            body {
+                padding-top: 86px;
+            }
+            .projects-archive-section {
+                padding-top: 3.5rem;
+                padding-bottom: 5rem;
+            }
+        </style>
+    </head>
+    <body class="text-white" style="background: linear-gradient(135deg, #070d1f 0%, #0d1535 60%, #0f0a2e 100%);">
+
+        <!-- Scroll progress -->
+        <div class="nav-progress" id="nav-progress"></div>
+
+        <!--==================== HEADER ====================-->
+        <header class="projects-header" id="projects-header">
+            <nav class="projects-nav-shell">
+                <!-- Logo -->
+                <a href="/" class="nav-logo">
+                    <span class="nav-logo-mark"><i class="uil uil-brackets-curly"></i></span>
+                    <span class="nav-logo-text">Dayanidi Vadivel</span>
+                </a>
+                
+                <!-- Action -->
+                <a href="/" class="nav-back-btn">
+                    <i class="uil uil-arrow-left"></i> Back to Home
+                </a>
+            </nav>
+        </header>
+
+        <!--==================== MAIN CONTENT ====================-->
+        <main class="main">
+            
+            <section class="projects-archive-section section">
+                <div class="container">
+                    
+                    <div class="sec-head">
+                        <p class="sec-tag">Archive</p>
+                        <h2 class="sec-title">Full Project <span class="hl">Catalog</span></h2>
+                        <p class="sec-sub">Deep dive into all <span>33 projects</span> &mdash; from commercial platforms to open source libraries.</p>
+                        <div class="sec-divider"></div>
+                    </div>
+
+                    <!-- Search, Filters, and Sorting controls panel -->
+                    <div class="projects-controls">
+                        <!-- Search and Sort row -->
+                        <div class="projects-search-bar">
+                            <div class="projects-search-wrapper">
+                                <i class="uil uil-search"></i>
+                                <input type="text" id="projects-search" class="projects-search-input" placeholder="Search by name, technology stack, or description (e.g. Next.js, Python, JWT)..." autocomplete="off" aria-label="Search projects">
+                            </div>
+                            
+                            <div class="projects-sort-wrapper">
+                                <select id="projects-sort" class="projects-sort-select" aria-label="Sort projects">
+                                    <option value="newest">Sort by: Newest First</option>
+                                    <option value="oldest">Sort by: Oldest First</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Category Filters row (rendered via JS) -->
+                        <div class="portfolio-filter-container" id="portfolio-filters" style="margin-bottom: 0; padding: 0.5rem 0;">
+                            <!-- Filter buttons will load here -->
+                        </div>
+
+                        <!-- Metadata and Count status row -->
+                        <div class="projects-meta-row">
+                            <div class="projects-count-label">
+                                Showing <span id="visible-count">0</span> of <span id="total-count">0</span> projects
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects Grid -->
+                    <div class="work__container bd-grid" id="work-grid">
+                        <!-- cards render dynamically via assets/js/projects-page.js -->
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!--==================== DETAILS MODAL ====================-->
+        <div class="pw-modal" id="myModal" aria-hidden="true">
+            <div class="pw-modal-backdrop" data-close></div>
+            <div class="pw-modal-panel" role="dialog" aria-modal="true" aria-labelledby="title" data-lenis-prevent>
+                <span class="pw-modal-scan" aria-hidden="true"></span>
+                <button type="button" class="pw-modal-close" data-close aria-label="Close">&times;</button>
+
+                <div class="pw-modal-head">
+                    <div class="pw-modal-icon" id="modalIcon" aria-hidden="true"><i class="uil uil-apps"></i></div>
+                    <div class="pw-modal-headtext">
+                        <h3 class="pw-modal-title" id="title"></h3>
+                        <span class="pw-modal-svc" id="modalSvc"></span>
+                    </div>
+                    <span class="pw-modal-status"><span class="pw-dot"></span>OPERATIONAL</span>
+                </div>
+
+                <div class="pw-modal-body">
+                    <p id="info"></p>
+                    <div class="pw-modal-tags" id="modalTags"></div>
+                </div>
+
+                <div class="pw-modal-foot" id="modalFoot">
+                    <!-- Link buttons injected dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!--===== LENIS SMOOTH SCROLL =====-->
+        <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+        <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+        <!--===== DATA AND ORCHESTRATION =====-->
+        <script src="/assets/js/projects.js"></script>
+        <script src="/assets/js/projects-page.js"></script>
+
+        <script>
+            // Initialize Lenis scroll for smooth experience
+            const lenis = new Lenis({
+                duration: 1.0,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                gestureOrientation: 'vertical',
+                normalizeWheel: true,
+                smoothWheel: true
+            });
+            window.__lenis = lenis;
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+            
+            // Scroll progress bar
+            lenis.on('scroll', (e) => {
+                const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                const bar = document.getElementById('nav-progress');
+                if (bar) bar.style.width = scrollPercent + '%';
+            });
+        </script>
+    </body>
+</html>

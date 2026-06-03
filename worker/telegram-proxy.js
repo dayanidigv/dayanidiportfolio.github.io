@@ -21,6 +21,8 @@ const ALLOWED_ORIGINS = [
   'https://dayanidiportfolio.github.io',
   'http://localhost:8765',
   'http://127.0.0.1:8765',
+  'http://127.0.0.1:5500',
+  'http://localhost:5500',
 ];
 
 const MAX_BODY_BYTES = 8000;

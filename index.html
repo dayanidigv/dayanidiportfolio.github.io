@@ -73,7 +73,7 @@
           </header>
 
           <!-- Mobile full-screen menu -->
-          <div class="mobile-menu" id="mobile-menu">
+          <div class="mobile-menu" id="mobile-menu" data-lenis-prevent>
             <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu"><i class="uil uil-times"></i></button>
             <a href="#home" class="mobile-link active"><span>01</span>Home</a>
             <a href="#about" class="mobile-link"><span>02</span>About</a>
@@ -105,7 +105,8 @@
                 <!-- Ambient infrastructure background -->
                 <div class="hero-bg" aria-hidden="true">
                   <img class="hero-bg-mesh" data-depth="6" loading="lazy" decoding="async" src="/assets/images/assets/service-mesh-visuals.webp" alt="">
-                  <img class="hero-bg-rain" data-depth="10" loading="lazy" decoding="async" src="/assets/images/assets/digital-rain-streams.webp" alt="">
+                  <img class="hero-bg-cube" data-depth="10" loading="lazy" decoding="async" src="/assets/images/assets/data-cubes.webp" alt="">
+                  <!-- <img class="hero-bg-rain" data-depth="10" loading="lazy" decoding="async" src="/assets/images/assets/digital-rain-streams.webp" alt=""> -->
                   <img class="hero-bg-grid" data-depth="4" loading="lazy" decoding="async" src="/assets/images/assets/holographic-grid-floor.webp" alt="">
                 </div>
                 <div class="row align-items-center">
@@ -114,23 +115,33 @@
                   <div class="col-lg-6 px-4">
                     <div id="coder1">
 
-                      <p class="hero-greeting">Hello, I'm</p>
+                      <p class="hero-greeting"><span>//</span> Hello, I'm</p>
                       <h1 class="hero-name">
                         <span class="name-white">Dayanidi </span><span class="name-purple">Vadivel</span>
                       </h1>
                       <p class="hero-role"><strong>Backend</strong> Systems Engineer</p>
-
-                      <p class="sql mb-3" style="font-size: clamp(0.6rem, 2.4vw, 0.75rem); color: #64748b; padding: 0.5rem 1rem; display: inline-block; max-width: 100%; overflow-x: auto;">
-                        <span style="color: #a78bfa;">dayanidi</span><span style="color: #60a5fa;">@nile</span><span style="color: #64748b;">:~$</span>
-                        <span style="color: #e2e8f0; margin-left: 0.5rem;">query --who-am-i</span>
-                      </p>
-
-                      <div class="home__data sql" style="padding: 1.1rem 1.25rem; font-size: clamp(0.56rem, 2.55vw, 0.9rem); display: inline-block; max-width: 100%; overflow-x: auto;">
-                        <span style="color: #60a5fa;">SELECT</span> <span style="color: #e2e8f0;">*</span> <span style="color: #60a5fa;">FROM</span> <span style="color: #e2e8f0; animation: glowgreen 2s infinite;">engineers</span> <span style="color: #60a5fa;">WHERE</span><br>
-                        &nbsp;&nbsp;<span style="color: #e2e8f0;">name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">LIKE</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'%<span class="nametag"></span>%'</span> <span style="color: #60a5fa;">AND</span><br>
-                        &nbsp;&nbsp;<span style="color: #e2e8f0;">role</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">=</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'Backend_Systems_Engineer'</span> <span style="color: #60a5fa;">AND</span><br>
-                        &nbsp;&nbsp;<span style="color: #e2e8f0;">company</span>  <span style="color: #60a5fa;">=</span> <span style="color: #a78bfa; animation: glowgreen 2s infinite;">'Nile'</span> <span style="color: #60a5fa;">AND</span><br>
-                        &nbsp;&nbsp;<span style="color: #e2e8f0;">specialty</span> <span style="color: #60a5fa;">IN</span> <span style="color: #64748b;">(</span><span style="color: #a78bfa;">'Automation'</span><span style="color: #64748b;">,</span> <span style="color: #a78bfa;">'Scale'</span><span style="color: #64748b;">,</span> <span style="color: #a78bfa;">'Reliability'</span><span style="color: #64748b;">)</span><span style="color: #60a5fa;">;</span>
+ 
+                      <div class="hero-terminal">
+                        <div class="hero-terminal-header">
+                          <div class="hero-terminal-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                          </div>
+                          <div class="hero-terminal-title">mysql -u dayanidi</div>
+                        </div>
+                        <div class="hero-terminal-body">
+                          <div class="terminal-line">
+                            <span class="t-user">dayanidi</span><span class="t-host">@nile</span><span class="t-char">:~$</span><span class="t-cmd">query --who-am-i</span><span class="terminal-cursor"></span>
+                          </div>
+                          <div class="terminal-line" style="margin-top: 0.75rem;">
+                            <span class="t-sql-keyword">SELECT</span> <span style="color: #e2e8f0;">*</span> <span class="t-sql-keyword">FROM</span> <span class="t-sql-table">engineers</span> <span class="t-sql-keyword">WHERE</span><br>
+                            &nbsp;&nbsp;<span class="t-sql-field">name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-sql-keyword">LIKE</span> <span class="t-sql-string">'%<span class="nametag"></span>%'</span> <span class="t-sql-keyword">AND</span><br>
+                            &nbsp;&nbsp;<span class="t-sql-field">role</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-sql-keyword">=</span> <span class="t-sql-string">'Backend_Systems_Engineer'</span> <span class="t-sql-keyword">AND</span><br>
+                            &nbsp;&nbsp;<span class="t-sql-field">company</span>  <span class="t-sql-keyword">=</span> <span class="t-sql-string">'Nile'</span> <span class="t-sql-keyword">AND</span><br>
+                            &nbsp;&nbsp;<span class="t-sql-field">specialty</span> <span class="t-sql-keyword">IN</span> <span class="t-sql-bracket">(</span><span class="t-sql-string">'Automation'</span><span class="t-sql-bracket">,</span> <span class="t-sql-string">'Scale'</span><span class="t-sql-bracket">,</span> <span class="t-sql-string">'Reliability'</span><span class="t-sql-bracket">)</span><span class="t-sql-keyword">;</span>
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -195,8 +206,15 @@
                       <h2 class="about__subtitle" style="font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; line-height: 1.25;">
                         Building systems that work at <span style="color: #a78bfa; animation: glowgreen 2s infinite;">scale.</span>
                       </h2>
-                      <h4 class="about__subtitle" style="color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-bottom: 1rem;">
-                        Currently: <span style="color: #a78bfa;" id="word"></span><span class="blink">|</span>
+                      <h4 class="about__subtitle" style="color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
+                        <span>Currently:</span>
+                        <span class="cube-rotator-container" id="cube-container">
+                          <span class="cube-rotator" id="cube-rotator">
+                            <span class="cube-face cube-front" id="cube-front">Backend Engineer</span>
+                            <span class="cube-face cube-bottom" id="cube-bottom"></span>
+                          </span>
+                          <span class="cube-sizer" id="cube-sizer" style="visibility: hidden; height: 0; display: inline-block; white-space: nowrap; font-weight: 600;">Backend Engineer</span>
+                        </span>
                       </h4>
                       <p style="color: #94a3b8; line-height: 1.8; font-size: 0.92rem;">
                         I work on backend systems, automation, and large-scale infrastructure,
@@ -349,72 +367,117 @@
                   <div class="sec-divider"></div>
                 </div>
 
-                <p class="sql mb-4" style="font-size: 0.8rem; padding: 0.65rem 1.25rem; display: inline-block;">
-                  <span style="color: #818cf8;">const</span>
-                  <span style="color: #e2e8f0;"> myExperience</span>
-                  <span style="color: #60a5fa;"> =</span>
-                  <span style="color: #a78bfa;"> [</span>
-                  <span style="color: #64748b;"> &nbsp;// sorted by recency</span>
-                </p>
-
-                <div class="exp-grid">
-
-                  <div class="exp-card current">
-                    <span class="exp-badge">Current</span>
-                    <div class="exp-role">Technical Staff Intern</div>
-                    <div class="exp-company">Nile · Python &amp; Network Automation</div>
-                    <div class="exp-period">Sep 2024 &rarr; Present &nbsp;&bull;&nbsp; Bengaluru &nbsp;&bull;&nbsp; On-site</div>
-                    <div class="exp-tags">
-                      <span class="exp-tag">Python</span>
-                      <span class="exp-tag">Network Automation</span>
-                      <span class="exp-tag">Docker</span>
-                      <span class="exp-tag">Kubernetes</span>
-                      <span class="exp-tag">AWS</span>
-                      <span class="exp-tag">GCP</span>
-                      <span class="exp-tag">Jenkins</span>
-                    </div>
+                <!-- Interactive Experience Timeline Tabs -->
+                <div class="exp-tabs-container">
+                  <!-- Tabs Sidebar Menu -->
+                  <div class="exp-tabs-nav">
+                    <button type="button" class="exp-tab-btn active loading" data-tab="nile">Nile<span class="tab-progress-bar"></span></button>
+                    <button type="button" class="exp-tab-btn" data-tab="innak">Innak<span class="tab-progress-bar"></span></button>
+                    <button type="button" class="exp-tab-btn" data-tab="thb">The Half Brick<span class="tab-progress-bar"></span></button>
+                    <button type="button" class="exp-tab-btn" data-tab="esamudaay">eSamudaay<span class="tab-progress-bar"></span></button>
                   </div>
 
-                  <div class="exp-card">
-                    <div class="exp-role">CTO &amp; Co-founder</div>
-                    <div class="exp-company">Innak</div>
-                    <div class="exp-period">Oct 2023 &rarr; Oct 2025 &nbsp;&bull;&nbsp; 2 yrs</div>
-                    <div class="exp-tags">
-                      <span class="exp-tag">React.js</span>
-                      <span class="exp-tag">Node.js</span>
-                      <span class="exp-tag">Python</span>
-                      <span class="exp-tag">Flutter</span>
-                      <span class="exp-tag">Laravel</span>
-                      <span class="exp-tag">MySQL</span>
+                  <!-- Details Pane Display -->
+                  <div class="exp-details-pane">
+                    <!-- Nile Tab Panel -->
+                    <div class="exp-details-content active" id="exp-nile">
+                      <div class="exp-details-header">
+                        <h3>Technical Staff Intern <span>@ <a href="https://nilesecure.com/" target="_blank" rel="noopener">Nile</a></span></h3>
+                        <div class="exp-details-meta">
+                          <span><i class="uil uil-calendar-alt"></i> Sep 2024 &rarr; Present</span>
+                          <span><i class="uil uil-map-marker"></i> Bengaluru &middot; On-site</span>
+                          <span><i class="uil uil-processor"></i> Python &amp; Network Automation</span>
+                        </div>
+                      </div>
+                      <ul class="exp-bullets">
+                        <li>Developed automated network anomaly detection pipelines and telemetry modules in Python to streamline operational network monitoring at scale.</li>
+                        <li>Maintained, containerized, and managed microservices deployment configurations across staging and production using Docker, Kubernetes, and Jenkins pipelines.</li>
+                        <li>Built custom infrastructure provisioning scripts and automation layers for fleet management on AWS and GCP environments.</li>
+                      </ul>
+                      <div class="portfolio-tags" style="justify-content: flex-start;">
+                        <span class="exp-tag">Python</span>
+                        <span class="exp-tag">Network Automation</span>
+                        <span class="exp-tag">Docker</span>
+                        <span class="exp-tag">Kubernetes</span>
+                        <span class="exp-tag">AWS</span>
+                        <span class="exp-tag">GCP</span>
+                        <span class="exp-tag">Jenkins</span>
+                      </div>
+                    </div>
+
+                    <!-- Innak Tab Panel -->
+                    <div class="exp-details-content" id="exp-innak">
+                      <div class="exp-details-header">
+                        <h3>CTO &amp; Co-founder <span>@ Innak</span></h3>
+                        <div class="exp-details-meta">
+                          <span><i class="uil uil-calendar-alt"></i> Oct 2023 &rarr; Oct 2025</span>
+                          <span><i class="uil uil-map-marker"></i> Salem, TN &middot; Hybrid</span>
+                          <span><i class="uil uil-user-arrows"></i> Tech Architecture &amp; Lead</span>
+                        </div>
+                      </div>
+                      <ul class="exp-bullets">
+                        <li>Led product architectural designs and spearheaded technology strategy for consumer web platforms and mobile services.</li>
+                        <li>Engineered high-performance, secure backend REST APIs using Laravel and Node.js with SQL database configurations.</li>
+                        <li>Designed and shipped responsive web user interfaces in React.js and compiled cross-platform mobile apps (e.g. Flames App) using Flutter and Dart.</li>
+                      </ul>
+                      <div class="portfolio-tags" style="justify-content: flex-start;">
+                        <span class="exp-tag">React.js</span>
+                        <span class="exp-tag">Node.js</span>
+                        <span class="exp-tag">Python</span>
+                        <span class="exp-tag">Flutter</span>
+                        <span class="exp-tag">Laravel</span>
+                        <span class="exp-tag">MySQL</span>
+                      </div>
+                    </div>
+
+                    <!-- The Half Brick Panel -->
+                    <div class="exp-details-content" id="exp-thb">
+                      <div class="exp-details-header">
+                        <h3>Volunteer (Former Tech Dev Intern) <span>@ <a href="http://thehalfbrick.com/" target="_blank" rel="noopener">The Half Brick</a></span></h3>
+                        <div class="exp-details-meta">
+                          <span><i class="uil uil-calendar-alt"></i> Jan 2024 &rarr; Present</span>
+                          <span><i class="uil uil-map-marker"></i> Salem &middot; Remote</span>
+                          <span><i class="uil uil-brackets-curly"></i> Full-Stack &amp; Support</span>
+                        </div>
+                      </div>
+                      <ul class="exp-bullets">
+                        <li><strong>Volunteer (Jan 2026 &rarr; Present):</strong> Providing ongoing technical assistance, collaborative support, and systems alignment.</li>
+                        <li><strong>Tech Development Intern (Jan 2024 &rarr; Jan 2026):</strong> Shipped premium public websites using Next.js, React, and Tailwind CSS, improving content rendering and SEO metadata optimization.</li>
+                        <li>Built secure backend administrative structures (Payload CMS) using PostgreSQL and AWS S3 storage adapters, and developed classroom analytics dashboards.</li>
+                      </ul>
+                      <div class="portfolio-tags" style="justify-content: flex-start;">
+                        <span class="exp-tag">Python</span>
+                        <span class="exp-tag">Next.js</span>
+                        <span class="exp-tag">Payload CMS</span>
+                        <span class="exp-tag">PostgreSQL</span>
+                        <span class="exp-tag">AWS S3</span>
+                        <span class="exp-tag">APIs</span>
+                      </div>
+                    </div>
+
+                    <!-- eSamudaay Panel -->
+                    <div class="exp-details-content" id="exp-esamudaay">
+                      <div class="exp-details-header">
+                        <h3>Operations Lead <span>@ eSamudaay</span></h3>
+                        <div class="exp-details-meta">
+                          <span><i class="uil uil-calendar-alt"></i> Nov 2022 &rarr; Nov 2023</span>
+                          <span><i class="uil uil-map-marker"></i> Tiruchengode &middot; Part-time</span>
+                          <span><i class="uil uil-briefcase"></i> Operations &amp; Stakeholders</span>
+                        </div>
+                      </div>
+                      <ul class="exp-bullets">
+                        <li>Managed regional merchant onboarding, service verification procedures, and local logistics pipelines.</li>
+                        <li>Coordinated on-the-ground operational teams to align local delivery execution and logistics support targets.</li>
+                        <li>Handled business stakeholders client relations, gathering operational feedback to optimize platform usability.</li>
+                      </ul>
+                      <div class="portfolio-tags" style="justify-content: flex-start;">
+                        <span class="exp-tag">Team Leadership</span>
+                        <span class="exp-tag">Operations</span>
+                        <span class="exp-tag">Stakeholder Mgmt</span>
+                      </div>
                     </div>
                   </div>
-
-                  <div class="exp-card">
-                    <div class="exp-role">Tech Development Intern</div>
-                    <div class="exp-company">The Half Brick</div>
-                    <div class="exp-period">Jan 2024 &rarr; Jan 2026 &nbsp;&bull;&nbsp; Remote</div>
-                    <div class="exp-tags">
-                      <span class="exp-tag">Python</span>
-                      <span class="exp-tag">Full-Stack</span>
-                      <span class="exp-tag">Backend APIs</span>
-                      <span class="exp-tag">Automation</span>
-                    </div>
-                  </div>
-
-                  <div class="exp-card">
-                    <div class="exp-role">Operations Lead</div>
-                    <div class="exp-company">eSamudaay &nbsp;&bull;&nbsp; Part-time</div>
-                    <div class="exp-period">Nov 2022 &rarr; Nov 2023 &nbsp;&bull;&nbsp; Tiruchengode</div>
-                    <div class="exp-tags">
-                      <span class="exp-tag">Team Leadership</span>
-                      <span class="exp-tag">Operations</span>
-                      <span class="exp-tag">Stakeholder Mgmt</span>
-                    </div>
-                  </div>
-
                 </div>
-
-                <p class="sql mt-3" style="font-size: 0.8rem; color: #a78bfa; padding: 0.5rem 1.25rem; display: inline-block;">];</p>
 
               </div>
             </section>
@@ -430,88 +493,216 @@
                   <div class="sec-divider"></div>
                 </div>
 
-                <p class="sql mb-3" style="display: inline-block; font-size: 0.78rem; padding: 0.5rem 1.1rem;">
-                  <span style="color: #64748b;">$</span>
-                  <span style="color: #60a5fa;"> cat</span>
-                  <span style="color: #a78bfa;"> ~/.config/tech_stack.json</span>
-                </p>
-
-                <div class="sql" style="padding: 1.5rem 2rem;">
-
-                  <div class="skill-json-section">
-                    <span class="json-key">"backend"</span><span class="json-default"> : [</span>
-                    <div class="skill-chip-row">
-                      <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
-                      <span class="skill-chip"><i class="devicon-nodejs-plain colored"></i>Node.js</span>
-                      <span class="skill-chip"><i class="devicon-java-original colored"></i>Java</span>
-                      <span class="skill-chip"><i class="devicon-c-original colored"></i>C</span>
-                      <span class="skill-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
-                      <span class="skill-chip"><i class="devicon-fastapi-plain colored"></i>FastAPI</span>
-                      <span class="skill-chip"><i class="devicon-flask-original colored"></i>Flask</span>
-                      <span class="skill-chip skill-special"><i class="uil uil-link-alt"></i>REST APIs</span>
-                      <span class="skill-chip skill-special"><i class="uil uil-network"></i>Net Automation</span>
+                <!-- Interactive IDE Skills Mockup -->
+                <div class="ide-container">
+                  <!-- Sidebar Explorer -->
+                  <div class="ide-sidebar">
+                    <div class="ide-sidebar-title">Explorer</div>
+                    <div class="ide-folder">
+                      <span class="ide-folder-name"><i class="uil uil-folder"></i> config</span>
+                      <ul class="ide-files">
+                        <li class="ide-file active loading" data-tab="backend">
+                          <i class="bx bxs-file-json json-tab-icon"></i> backend.json<span class="tab-progress-bar"></span>
+                        </li>
+                        <li class="ide-file" data-tab="automation">
+                          <i class="bx bxs-file-json json-tab-icon"></i> automation.json<span class="tab-progress-bar"></span>
+                        </li>
+                        <li class="ide-file" data-tab="cloud-infra">
+                          <i class="bx bxs-file-json json-tab-icon"></i> cloud_infra.json<span class="tab-progress-bar"></span>
+                        </li>
+                        <li class="ide-file" data-tab="web">
+                          <i class="bx bxs-file-json json-tab-icon"></i> web.json<span class="tab-progress-bar"></span>
+                        </li>
+                        <li class="ide-file" data-tab="tools">
+                          <i class="bx bxs-file-json json-tab-icon"></i> tools.json<span class="tab-progress-bar"></span>
+                        </li>
+                        <li class="ide-file" data-tab="emerging">
+                          <i class="bx bxs-file-json json-tab-icon"></i> emerging.json<span class="tab-progress-bar"></span>
+                        </li>
+                      </ul>
                     </div>
-                    <span class="json-default">],</span>
                   </div>
 
-                  <div class="skill-json-section">
-                    <span class="json-key">"cloud_infra"</span><span class="json-default"> : [</span>
-                    <div class="skill-chip-row">
-                      <span class="skill-chip"><i class="devicon-docker-plain colored"></i>Docker</span>
-                      <span class="skill-chip"><i class="devicon-kubernetes-plain colored"></i>Kubernetes</span>
-                      <span class="skill-chip"><i class="devicon-amazonwebservices-original colored"></i>AWS</span>
-                      <span class="skill-chip"><i class="devicon-googlecloud-plain colored"></i>GCP</span>
-                      <span class="skill-chip"><i class="devicon-jenkins-line colored"></i>Jenkins</span>
-                      <span class="skill-chip skill-special"><i class="uil uil-repeat"></i>CI/CD</span>
-                      <span class="skill-chip"><i class="devicon-linux-plain colored"></i>Linux Server</span>
+                  <!-- Editor Window -->
+                  <div class="ide-editor">
+                    <!-- Editor Tabs Header -->
+                    <div class="ide-tabs">
+                      <div class="ide-tab active" data-tab="backend">
+                        <i class="bx bxs-file-json json-tab-icon"></i> backend.json
+                      </div>
+                      <div class="ide-tab" data-tab="automation">
+                        <i class="bx bxs-file-json json-tab-icon"></i> automation.json
+                      </div>
+                      <div class="ide-tab" data-tab="cloud-infra">
+                        <i class="bx bxs-file-json json-tab-icon"></i> cloud_infra.json
+                      </div>
+                      <div class="ide-tab" data-tab="web">
+                        <i class="bx bxs-file-json json-tab-icon"></i> web.json
+                      </div>
+                      <div class="ide-tab" data-tab="tools">
+                        <i class="bx bxs-file-json json-tab-icon"></i> tools.json
+                      </div>
+                      <div class="ide-tab" data-tab="emerging">
+                        <i class="bx bxs-file-json json-tab-icon"></i> emerging.json
+                      </div>
                     </div>
-                    <span class="json-default">],</span>
-                  </div>
 
-                  <div class="skill-json-section">
-                    <span class="json-key">"web"</span><span class="json-default"> : [</span>
-                    <div class="skill-chip-row">
-                      <span class="skill-chip"><i class="devicon-react-original colored"></i>React</span>
-                      <span class="skill-chip"><i class="devicon-typescript-original colored"></i>TypeScript</span>
-                      <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
-                      <span class="skill-chip"><i class="devicon-html5-original colored"></i>HTML5</span>
-                      <span class="skill-chip"><i class="devicon-css3-original colored"></i>CSS3</span>
-                      <span class="skill-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
-                      <span class="skill-chip"><i class="devicon-flutter-original colored"></i>Flutter</span>
-                      <span class="skill-chip skill-special"><i class="uil uil-mobile-android-alt"></i>Responsive</span>
+                    <!-- Editor Code Body -->
+                    <div class="ide-code-body">
+                      <!-- Backend Development Tab -->
+                      <div class="ide-code-section active" id="code-backend">
+                        <div class="code-line"><span class="json-key">"backend_development"</span>: {</div>
+                        <div class="code-line pad-1"><span class="json-key">"languages"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
+                          <span class="skill-chip"><i class="devicon-nodejs-plain colored"></i>Node.js</span>
+                          <span class="skill-chip"><i class="devicon-java-original colored"></i>Java</span>
+                          <span class="skill-chip"><i class="devicon-c-original colored"></i>C</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"frameworks"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                          <span class="skill-chip"><i class="devicon-fastapi-plain colored"></i>FastAPI</span>
+                          <span class="skill-chip"><i class="devicon-flask-original colored"></i>Flask</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"capabilities"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip skill-special"><i class="uil uil-link-alt"></i>REST APIs</span>
+                          <span class="skill-chip skill-special"><i class="uil uil-network"></i>Net Automation</span>
+                        </div>
+                        <div class="code-line pad-1">]</div>
+                        <div class="code-line">}</div>
+                      </div>
+
+                      <!-- Automation & Scripting Tab -->
+                      <div class="ide-code-section" id="code-automation">
+                        <div class="code-line"><span class="json-key">"automation_scripting"</span>: {</div>
+                        <div class="code-line pad-1"><span class="json-key">"core_tools"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
+                          <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                          <span class="skill-chip skill-special"><i class="uil uil-envelope-check"></i>Apps Script</span>
+                          <span class="skill-chip"><i class="devicon-bash-plain colored"></i>Bash</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"integrations"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip skill-special"><i class="bx bxl-telegram"></i>Telegram Bot API</span>
+                          <span class="skill-chip skill-special"><i class="uil uil-envelope-upload"></i>Mail Triggers</span>
+                          <span class="skill-chip skill-special"><i class="uil uil-table"></i>Spreadsheet Sync</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"workflows"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub Actions</span>
+                          <span class="skill-chip skill-special"><i class="uil uil-repeat"></i>Cron Jobs</span>
+                          <span class="skill-chip skill-special"><i class="uil uil-search-alt"></i>Web Scraping</span>
+                        </div>
+                        <div class="code-line pad-1">]</div>
+                        <div class="code-line">}</div>
+                      </div>
+
+                      <!-- Cloud Infrastructure Tab -->
+                      <div class="ide-code-section" id="code-cloud-infra">
+                        <div class="code-line"><span class="json-key">"cloud_infrastructure"</span>: {</div>
+                        <div class="code-line pad-1"><span class="json-key">"containers_orchestration"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-docker-plain colored"></i>Docker</span>
+                          <span class="skill-chip"><i class="devicon-kubernetes-plain colored"></i>Kubernetes</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"platforms_servers"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-amazonwebservices-original colored"></i>AWS</span>
+                          <span class="skill-chip"><i class="devicon-googlecloud-plain colored"></i>GCP</span>
+                          <span class="skill-chip"><i class="devicon-linux-plain colored"></i>Linux Server</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"ci_cd_automation"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-jenkins-line colored"></i>Jenkins</span>
+                          <span class="skill-chip skill-special"><i class="uil uil-repeat"></i>CI/CD</span>
+                        </div>
+                        <div class="code-line pad-1">]</div>
+                        <div class="code-line">}</div>
+                      </div>
+
+                      <!-- Web Frontend Tab -->
+                      <div class="ide-code-section" id="code-web">
+                        <div class="code-line"><span class="json-key">"web_frontend"</span>: {</div>
+                        <div class="code-line pad-1"><span class="json-key">"languages"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-typescript-original colored"></i>TypeScript</span>
+                          <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                          <span class="skill-chip"><i class="devicon-html5-original colored"></i>HTML5</span>
+                          <span class="skill-chip"><i class="devicon-css3-original colored"></i>CSS3</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"frameworks_libraries"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-react-original colored"></i>React</span>
+                          <span class="skill-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
+                          <span class="skill-chip"><i class="devicon-flutter-original colored"></i>Flutter</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"responsive_design"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip skill-special"><i class="uil uil-mobile-android-alt"></i>Responsive</span>
+                        </div>
+                        <div class="code-line pad-1">]</div>
+                        <div class="code-line">}</div>
+                      </div>
+
+                      <!-- Developer Tools Tab -->
+                      <div class="ide-code-section" id="code-tools">
+                        <div class="code-line"><span class="json-key">"developer_tools"</span>: {</div>
+                        <div class="code-line pad-1"><span class="json-key">"version_control"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-git-original colored"></i>Git</span>
+                          <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"databases_services"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-mysql-original colored"></i>MySQL</span>
+                          <span class="skill-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"utilities_environments"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip"><i class="devicon-linux-plain colored"></i>Linux</span>
+                          <span class="skill-chip"><i class="devicon-bash-plain colored"></i>Bash</span>
+                          <span class="skill-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
+                          <span class="skill-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                          <span class="skill-chip"><i class="devicon-dart-plain colored"></i>Dart</span>
+                        </div>
+                        <div class="code-line pad-1">]</div>
+                        <div class="code-line">}</div>
+                      </div>
+
+                      <!-- Emerging Technologies Tab -->
+                      <div class="ide-code-section" id="code-emerging">
+                        <div class="code-line"><span class="json-key">"emerging_technologies"</span>: {</div>
+                        <div class="code-line pad-1"><span class="json-key">"ai_automation"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip skill-ai"><i class="uil uil-robot"></i>LLMs</span>
+                          <span class="skill-chip skill-ai"><i class="uil uil-processor"></i>AI Automation</span>
+                          <span class="skill-chip skill-ai"><i class="uil uil-plug"></i>MCP</span>
+                          <span class="skill-chip skill-ai"><i class="uil uil-comment-alt-message"></i>Prompt Engineering</span>
+                        </div>
+                        <div class="code-line pad-1">],</div>
+                        <div class="code-line pad-1"><span class="json-key">"architecture"</span>: [</div>
+                        <div class="code-line pad-2">
+                          <span class="skill-chip skill-ai"><i class="uil uil-sitemap"></i>System Design</span>
+                          <span class="skill-chip skill-ai"><i class="uil uil-link-alt"></i>API Integrations</span>
+                        </div>
+                        <div class="code-line pad-1">]</div>
+                        <div class="code-line">}</div>
+                      </div>
                     </div>
-                    <span class="json-default">],</span>
                   </div>
-
-                  <div class="skill-json-section">
-                    <span class="json-key">"tools"</span><span class="json-default"> : [</span>
-                    <div class="skill-chip-row">
-                      <span class="skill-chip"><i class="devicon-mysql-original colored"></i>MySQL</span>
-                      <span class="skill-chip"><i class="devicon-git-original colored"></i>Git</span>
-                      <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub</span>
-                      <span class="skill-chip"><i class="devicon-linux-plain colored"></i>Linux</span>
-                      <span class="skill-chip"><i class="devicon-bash-plain colored"></i>Bash</span>
-                      <span class="skill-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
-                      <span class="skill-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
-                      <span class="skill-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
-                      <span class="skill-chip"><i class="devicon-dart-plain colored"></i>Dart</span>
-                    </div>
-                    <span class="json-default">],</span>
-                  </div>
-
-                  <div class="skill-json-section">
-                    <span class="json-key" style="color: #fb923c;">"emerging_tech"</span><span class="json-default"> : [</span>
-                    <div class="skill-chip-row">
-                      <span class="skill-chip skill-ai"><i class="uil uil-robot"></i>LLMs</span>
-                      <span class="skill-chip skill-ai"><i class="uil uil-processor"></i>AI Automation</span>
-                      <span class="skill-chip skill-ai"><i class="uil uil-plug"></i>MCP</span>
-                      <span class="skill-chip skill-ai"><i class="uil uil-comment-alt-message"></i>Prompt Engineering</span>
-                      <span class="skill-chip skill-ai"><i class="uil uil-sitemap"></i>System Design</span>
-                      <span class="skill-chip skill-ai"><i class="uil uil-link-alt"></i>API Integrations</span>
-                    </div>
-                    <span class="json-default">]</span>
-                  </div>
-
                 </div>
 
               </div>
@@ -533,117 +724,45 @@
                 <div class="sec-divider"></div>
               </div>
 
-    <div class="work__container bd-grid">
+    <!-- Timeline / Group Filters -->
+    <div class="portfolio-filter-container" id="portfolio-filters"></div>
 
-      <div class="item" id="1">
-        <img loading="lazy" decoding="async" src="/assets/images/portfolio4.png" alt="MCP Gateway">
-        <div class="text">
-          <h3>MCP Gateway</h3>
-          <p>One Cloudflare Worker unifying LinkedIn, Discord, Firebase &amp; file rendering through a single auth layer.</p>
-          <div class="portfolio-tags"><span>Cloudflare</span><span>API</span><span>Edge</span><span>#BuildInPublic</span></div>
-        </div>
-        <button type="button" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
-        </button>
-      </div>
+    <div class="work__container bd-grid" id="work-grid">
+      <!-- cards render from PROJECTS (assets/js/projects.js) via renderProjects() in main.js -->
+    </div>
 
-      <div class="item" id="2">
-        <img loading="lazy" decoding="async" src="/assets/images/portfolio6.png" alt="FLAMES App">
-        <div class="text">
-          <h3>FLAMES App</h3>
-          <p>Flutter mobile app · classic FLAMES game shipped to Google Play Store. Built 3 years ago, now live in production.</p>
-          <div class="portfolio-tags"><span>Flutter</span><span>Dart</span><span>Play Store</span></div>
-        </div>
-        <button type="button" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
-        </button>
-      </div>
+    <!-- Pagination Controls -->
+    <div class="portfolio-pagination" id="portfolio-pagination"></div>
 
-      <div class="item" id="3">
-        <img loading="lazy" decoding="async" src="/assets/images/portfolio2.png" alt="GitHub Automation Script">
-        <div class="text">
-          <h3>GitHub Automation Script</h3>
-          <p>Google Apps Script that auto-committed to GitHub every day for 365 days · no servers, no cron jobs, zero manual effort.</p>
-          <div class="portfolio-tags"><span>Google Apps Script</span><span>GitHub API</span><span>Automation</span></div>
-        </div>
-        <button type="button" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
-        </button>
-      </div>
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <a href="/projects/" class="button button--flex" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        Explore Full Catalog <i class="uil uil-arrow-right button__icon"></i>
+      </a>
+    </div>
 
-      <div class="item" id="4">
-        <img loading="lazy" decoding="async" src="/assets/images/portfolio1.png" alt="Li-Fi Laser Communication">
-        <div class="text">
-          <h3>Li-Fi · Laser Light Comm</h3>
-          <p>Transmitted music through a laser beam. V1: music. V2: files. V3: internet over light. Team project with hardware.</p>
-          <div class="portfolio-tags"><span>IoT</span><span>Hardware</span><span>Li-Fi</span><span>Optics</span></div>
-        </div>
-        <button type="button" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
-        </button>
-      </div>
+<!-- Project detail panel -->
+<div class="pw-modal" id="myModal" aria-hidden="true">
+  <div class="pw-modal-backdrop" data-close></div>
+  <div class="pw-modal-panel" role="dialog" aria-modal="true" aria-labelledby="title" data-lenis-prevent>
+    <span class="pw-modal-scan" aria-hidden="true"></span>
+    <button type="button" class="pw-modal-close" data-close aria-label="Close">&times;</button>
 
-      <div class="item" id="5">
-        <img loading="lazy" decoding="async" src="/assets/images/portfolio5.png" alt="Apps Script Form Handler">
-        <div class="text">
-          <h3>Apps Script Form Handler</h3>
-          <p>Free automated email-on-submit for HTML forms using Google Apps Script · no paid services, no backend server.</p>
-          <div class="portfolio-tags"><span>Google Apps Script</span><span>Automation</span><span>Free</span></div>
-        </div>
-        <button type="button" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
-        </button>
+    <div class="pw-modal-head">
+      <div class="pw-modal-icon" id="modalIcon" aria-hidden="true"><i class="uil uil-apps"></i></div>
+      <div class="pw-modal-headtext">
+        <h3 class="pw-modal-title" id="title"></h3>
+        <span class="pw-modal-svc" id="modalSvc"></span>
       </div>
+      <span class="pw-modal-status"><span class="pw-dot"></span>OPERATIONAL</span>
+    </div>
 
-      <div class="item" id="6">
-        <img loading="lazy" decoding="async" src="/assets/images/portfolio3.png" alt="Telegram Form Bot">
-        <div class="text">
-          <h3>Telegram Form Bot</h3>
-          <p>Routes HTML form submissions directly to Telegram · instant, free alternative to Formspree and similar paid services.</p>
-          <div class="portfolio-tags"><span>Telegram API</span><span>JavaScript</span><span>Free Tool</span></div>
-        </div>
-        <button type="button" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
-        </button>
-      </div>
+    <div class="pw-modal-body">
+      <p id="info"></p>
+      <div class="pw-modal-tags" id="modalTags"></div>
+    </div>
 
-      <div class="item" id="7">
-        <img loading="lazy" decoding="async" src="/assets/images/portfolio4.png" alt="Nile AI-thon 2025">
-        <div class="text">
-          <h3>Nile AI-thon 2025</h3>
-          <p>Internal hackathon at Nile Global · autonomous network operations, AI-driven anomaly detection and infrastructure automation.</p>
-          <div class="portfolio-tags"><span>AI</span><span>Network</span><span>Automation</span><span>Nile</span></div>
-        </div>
-        <button type="button" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M11 12H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1Zm-1 8H4v-6h6ZM21.92 2.62a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59l-5.3 5.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38Z"/></svg>
-        </button>
-      </div>
-
-  </div>
-
-<!-- Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content bg-dark">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h5 class="modal-title" id="title" style="color: #a78bfa;"></h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal Body -->
-      <div class="modal-body">
-        <img id="img" src="" alt="">
-        <br>
-        <div class="text-left">
-          <div id="info"></div>
-        </div>
-        <br>
-      </div>
-      <!-- Modal Footer -->
-      <div class="modal-footer">
-        <a id="site" href="" class="btn btn-primary">Visit</a>
-        <button type="button" class="btn btn-secondary btn" data-dismiss="modal">Close</button>
-      </div>
+    <div class="pw-modal-foot" id="modalFoot">
+      <!-- link buttons render from the project's links{} + a Close button -->
     </div>
   </div>
 </div>
@@ -703,19 +822,19 @@
                       <input type="text" id="hpInput" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
                       <div class="form-grid">
                         <div>
-                          <label class="contact__label">Name</label>
+                          <label class="contact__label" for="nameInput">Name</label>
                           <input type="text" id="nameInput" class="contact__input" required>
                         </div>
                         <div>
-                          <label class="contact__label">E-mail</label>
+                          <label class="contact__label" for="emailInput">E-mail</label>
                           <input type="email" id="emailInput" class="contact__input" required>
                         </div>
                         <div class="full">
-                          <label class="contact__label">Subject</label>
+                          <label class="contact__label" for="subjectInput">Subject</label>
                           <input type="text" id="subjectInput" class="contact__input" required>
                         </div>
                         <div class="full">
-                          <label class="contact__label">Message</label>
+                          <label class="contact__label" for="descriptionInput">Message</label>
                           <textarea id="descriptionInput" rows="5" class="contact__input" required></textarea>
                         </div>
                         <div class="full">
@@ -750,6 +869,7 @@
                   <a href="#experience">Experience</a>
                   <a href="#skills">Skills</a>
                   <a href="#portfolio">Portfolio</a>
+                  <a href="/projects/">Projects Catalog</a>
                 </div>
               </div>
               <div>
@@ -791,6 +911,8 @@
         <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
         <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 
+        <!--===== PROJECT DATA (edit projects here) =====-->
+        <script src="/assets/js/projects.js"></script>
         <!--===== MAIN JS =====-->
         <script src="/assets/js/main.js"></script>
         <!--===== HERO EFFECTS =====-->
